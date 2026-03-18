@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>হিসাব খোলার আবেদন - MH Finance</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Tiro+Bangla:ital@0;1&display=swap');
+        body { font-family: 'Tiro Bangla', serif; background-color: #f3f4f6; }
+        .bg-bank-green { background-color: #0b8e36; }
+        .text-bank-yellow { color: #facc15; }
+        
+        @media (min-width: 768px) {
+            .dropdown:hover .dropdown-menu { display: block; }
+        }
+        .transition-all { transition: all 0.3s ease-in-out; }
+        
+        /* Loading spinner for iframe */
+        .iframe-container { position: relative; width: 100%; min-height: 800px; }
+        .iframe-loading {
+            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+            color: #0b8e36; font-size: 1.5rem; font-weight: bold; z-index: -1;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 flex flex-col min-h-screen">
+
+    <nav class="bg-bank-green text-white shadow-lg sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="flex justify-between items-center py-4">
+                <a href="index.html" class="text-2xl font-bold flex items-center gap-2">
+                    <i class="fas fa-building-columns text-bank-yellow"></i> MH Finance
+                </a>
+                
+                <div class="hidden md:flex space-x-6 items-center" id="desktop-menu"></div>
+
+                <button id="mobileMenuBtn" class="md:hidden text-2xl focus:outline-none">
+                    <i class="fas fa-bars text-bank-yellow"></i>
+                </button>
+            </div>
+        </div>
+
+        <div id="mobileMenu" class="hidden md:hidden bg-green-800 border-t border-green-700 max-h-[70vh] overflow-y-auto"></div>
+    </nav>
+
+    <header class="bg-bank-green text-white py-8 px-4 text-center relative overflow-hidden shadow-md">
+        <div class="absolute top-0 left-0 w-24 h-24 bg-yellow-400 rounded-br-full opacity-20"></div>
+        <h1 class="text-3xl md:text-4xl font-bold relative z-10"><i class="fas fa-file-signature text-bank-yellow"></i> হিসাব খোলার আবেদন</h1>
+        <p class="mt-2 text-green-100 text-sm md:text-base relative z-10">নিচের ফর্মটি সঠিক তথ্য দিয়ে পূরণ করুন</p>
+    </header>
+
+    <main class="max-w-4xl mx-auto px-4 mt-8 mb-12 flex-grow w-full">
+        <div class="bg-white rounded-2xl shadow-xl border border-gray-200 overflow-hidden p-2 md:p-4">
+            
+            <div class="bg-yellow-50 border-l-4 border-yellow-400 p-4 mb-4 rounded">
+                <p class="text-sm md:text-base text-gray-700">
+                    <i class="fas fa-info-circle text-yellow-500 mr-1"></i> 
+                    <strong>জরুরী নির্দেশনা:</strong> ফর্মটি পূরণ করার সময় আপনার এনআইডি (NID) এবং প্রয়োজনীয় ডকুমেন্টের তথ্য হাতের কাছে রাখুন।
+                </p>
+            </div>
+
+            <div class="iframe-container rounded-lg overflow-hidden border border-gray-100">
+                <div class="iframe-loading"><i class="fas fa-spinner fa-spin"></i> ফর্ম লোড হচ্ছে...</div>
+                <iframe 
+                    src="https://forms.gle/bKjz8VFfn1i7uRea8" 
+                    width="100%" 
+                    height="900" 
+                    frameborder="0" 
+                    marginheight="0" 
+                    marginwidth="0"
+                    class="relative z-10 w-full rounded-lg"
+                    title="Account Opening Form">
+                </iframe>
+            </div>
+
+            <div class="text-center mt-6 mb-4">
+                <p class="text-gray-500 text-sm mb-2">আপনার ডিভাইসে ফর্মটি লোড হতে সমস্যা হলে নিচে ক্লিক করুন:</p>
+                <a href="https://forms.gle/bKjz8VFfn1i7uRea8" target="_blank" class="inline-block bg-bank-green text-white px-6 py-2 rounded-full font-bold hover:bg-green-700 shadow-md transition-all">
+                    <i class="fas fa-external-link-alt mr-2"></i> ব্রাউজারে ফর্মটি ওপেন করুন
+                </a>
+            </div>
+
+        </div>
+    </main>
+
+    <footer class="bg-gray-900 text-white pt-10 pb-6 mt-auto">
+        <div class="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+            <div>
+                <h3 class="text-xl font-bold text-yellow-400 mb-4 flex items-center gap-2"><i class="fas fa-building-columns"></i> MH Finance</h3>
+                <p class="text-gray-400 text-sm leading-relaxed">আমরা শরীয়াহ মোতাবেক পরিচালিত একটি নির্ভরযোগ্য আর্থিক প্রতিষ্ঠান। আপনাদের সঞ্চয় ও বিনিয়োগকে নিরাপদ রাখাই আমাদের মূল লক্ষ্য।</p>
+            </div>
+            <div>
+                <h3 class="text-lg font-bold text-white mb-4">গুরুত্বপূর্ণ লিংক</h3>
+                <ul class="space-y-2 text-gray-400 text-sm">
+                    <li><a href="index.html" class="hover:text-yellow-400 transition-all">হোম পেজ</a></li>
+                    <li><a href="demo-services.html" class="hover:text-yellow-400 transition-all">সকল সেবাসমূহ</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3 class="text-lg font-bold text-white mb-4">যোগাযোগ</h3>
+                <ul class="space-y-2 text-gray-400 text-sm">
+                    <li><i class="fas fa-map-marker-alt text-yellow-400 mr-2"></i> পল্লী বিদ্যুৎ অফিসের সামনে, পুলিশ লাইন, কিশোরগঞ্জ।</li>
+                    <li><i class="fas fa-phone-alt text-yellow-400 mr-2"></i> ০১৭১০-XXXXXX, ০১৭২৫-XXXXXX</li>
+                </ul>
+            </div>
+        </div>
+        <div class="border-t border-gray-700 pt-4 text-center text-gray-500 text-sm">
+            &copy; ২০২৬ MH Finance. সর্বস্বত্ব সংরক্ষিত। | Developed by Monjurul Haque
+        </div>
+    </footer>
+
+    <script>
+        // Menu Configuration (Same as index.html to keep navigation working)
+        const mhMenus = {
+            "সেবাসমূহ": [
+                { name: "এমএইচ ওয়ালেট", link: "demo-wallet.html" },
+                { name: "iBanking", link: "demo-ibanking.html" }
+            ],
+            "একাউন্টস": [
+                { name: "স্টুডেন্ট একাউন্ট", link: "demo-student.html" },
+                { name: "ডিপিএস (DPS)", link: "demo-dps.html" }
+            ],
+            "বিনিয়োগ": [
+                { name: "কৃষি বিনিয়োগ", link: "demo-krishi.html" }
+            ],
+            "কার্ডস": [
+                { name: "ভিসা কার্ড", link: "demo-visa.html" },
+                { name: "ক্রেডিট কার্ড", link: "demo-creditcard.html" } 
+            ],
+            "আমাদের সম্পর্কে": [
+                { name: "যোগাযোগ", link: "demo-contact.html" }
+            ]
+        };
+
+        // Generate Menus
+        function loadMenus() {
+            const desktopMenu = document.getElementById('desktop-menu');
+            const mobileMenu = document.getElementById('mobileMenu');
+            desktopMenu.innerHTML = '';
+            mobileMenu.innerHTML = '';
+
+            for (const category in mhMenus) {
+                let itemsHtml = '';
+                let mobileItemsHtml = '';
+                
+                mhMenus[category].forEach(item => {
+                    itemsHtml += `<a href="${item.link}" class="block px-4 py-2 text-gray-800 hover:bg-green-100 border-b border-gray-100 last:border-0">${item.name}</a>`;
+                    mobileItemsHtml += `<a href="${item.link}" class="block pl-8 pr-4 py-2 text-green-100 hover:bg-green-700 text-sm">${item.name}</a>`;
+                });
+
+                desktopMenu.innerHTML += `
+                    <div class="relative group dropdown">
+                        <button class="hover:text-yellow-300 font-medium py-2 flex items-center gap-1 transition-all">
+                            ${category} <i class="fas fa-chevron-down text-xs"></i>
+                        </button>
+                        <div class="dropdown-menu absolute hidden bg-white shadow-xl rounded-lg mt-0 min-w-[180px] overflow-hidden border border-gray-200">
+                            ${itemsHtml}
+                        </div>
+                    </div>
+                `;
+
+                mobileMenu.innerHTML += `
+                    <div class="border-b border-green-700">
+                        <div class="px-4 py-3 font-bold text-yellow-300 bg-green-900">${category}</div>
+                        <div class="pb-2">
+                            ${mobileItemsHtml}
+                        </div>
+                    </div>
+                `;
+            }
+        }
+
+        // Mobile Menu Toggle
+        document.getElementById('mobileMenuBtn').addEventListener('click', () => {
+            document.getElementById('mobileMenu').classList.toggle('hidden');
+        });
+
+        document.addEventListener("DOMContentLoaded", () => {
+            loadMenus();
+        });
+    </script>
+</body>
+</html>

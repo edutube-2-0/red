@@ -1,0 +1,1566 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>অর্থনীতি ব্লগ — মঞ্জুরুল হক স্যার</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&family=Tiro+Bangla:ital@0;1&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+<style>
+/* ══════════════════════════════════════════════════
+   ROOT VARIABLES & RESET
+══════════════════════════════════════════════════ */
+:root {
+  --navy:       #0d2137;
+  --navy2:      #162d47;
+  --blue:       #1a4b7c;
+  --blue-light: #2563a8;
+  --gold:       #d4930a;
+  --gold-light: #f5b944;
+  --cream:      #fdf8f0;
+  --white:      #ffffff;
+  --gray-50:    #f8fafc;
+  --gray-100:   #f1f5f9;
+  --gray-200:   #e2e8f0;
+  --gray-400:   #94a3b8;
+  --gray-600:   #475569;
+  --gray-700:   #334155;
+  --gray-900:   #0f172a;
+  --text:       #1e293b;
+  --danger:     #dc2626;
+  --success:    #16a34a;
+  --radius:     10px;
+  --shadow:     0 4px 24px rgba(0,0,0,0.08);
+  --shadow-lg:  0 12px 48px rgba(0,0,0,0.14);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{
+  font-family:'Hind Siliguri',sans-serif;
+  background:var(--gray-100);
+  color:var(--text);
+  min-height:100vh;
+  overflow-x:hidden;
+}
+img{max-width:100%;display:block;}
+button{font-family:'Hind Siliguri',sans-serif;cursor:pointer;}
+input,textarea,select{font-family:'Hind Siliguri',sans-serif;}
+a{text-decoration:none;color:inherit;}
+
+/* ══════════════════════════════════════════════════
+   PAGE SYSTEM
+══════════════════════════════════════════════════ */
+.page{display:none;}
+.page.active{display:block;}
+
+/* ══════════════════════════════════════════════════
+   ██████  LANDING PAGE
+══════════════════════════════════════════════════ */
+#landing {
+  min-height:100vh;
+  background: var(--navy);
+  position:relative;
+  overflow:hidden;
+}
+
+/* Animated background grid */
+#landing::before {
+  content:'';
+  position:absolute;inset:0;
+  background-image:
+    linear-gradient(rgba(212,147,10,0.07) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(212,147,10,0.07) 1px, transparent 1px);
+  background-size:60px 60px;
+  animation: gridFloat 20s linear infinite;
+}
+@keyframes gridFloat{0%{transform:translate(0,0);}100%{transform:translate(60px,60px);}}
+
+/* Glow orbs */
+.orb{
+  position:absolute;border-radius:50%;filter:blur(80px);opacity:0.18;pointer-events:none;
+}
+.orb-1{width:500px;height:500px;background:var(--blue-light);top:-100px;right:-100px;animation:pulse 8s ease-in-out infinite;}
+.orb-2{width:400px;height:400px;background:var(--gold);bottom:-80px;left:-80px;animation:pulse 10s ease-in-out 2s infinite;}
+.orb-3{width:300px;height:300px;background:#0ea5e9;top:50%;left:50%;animation:pulse 12s ease-in-out 4s infinite;}
+@keyframes pulse{0%,100%{transform:scale(1);}50%{transform:scale(1.15);}}
+
+/* Landing Nav */
+.landing-nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  padding:16px 40px;
+  display:flex;align-items:center;justify-content:space-between;
+  background:rgba(13,33,55,0.85);
+  backdrop-filter:blur(12px);
+  border-bottom:1px solid rgba(212,147,10,0.2);
+}
+.landing-logo{
+  font-family:'Tiro Bangla',serif;
+  font-size:1.4rem;color:var(--gold-light);
+  display:flex;align-items:center;gap:10px;
+}
+.landing-logo .dot{width:8px;height:8px;background:var(--gold);border-radius:50%;display:inline-block;}
+.landing-nav-links{display:flex;gap:24px;align-items:center;}
+.landing-nav-links a{
+  font-size:0.85rem;color:rgba(255,255,255,0.75);
+  transition:color 0.2s;font-weight:500;
+}
+.landing-nav-links a:hover{color:var(--gold-light);}
+.nav-cta{
+  padding:8px 20px;
+  background:linear-gradient(135deg,var(--gold),var(--gold-light));
+  color:var(--navy)!important;font-weight:700!important;
+  border-radius:6px;transition:opacity 0.2s!important;
+}
+.nav-cta:hover{opacity:0.9;}
+
+/* Hero Section */
+.hero{
+  min-height:100vh;
+  display:flex;align-items:center;justify-content:center;
+  padding:120px 40px 60px;
+  position:relative;z-index:1;
+}
+.hero-inner{max-width:900px;margin:0 auto;text-align:center;}
+
+.hero-badge{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:6px 16px;
+  background:rgba(212,147,10,0.12);
+  border:1px solid rgba(212,147,10,0.35);
+  border-radius:30px;
+  font-size:0.75rem;font-weight:600;
+  color:var(--gold-light);
+  letter-spacing:0.06em;text-transform:uppercase;
+  margin-bottom:28px;
+  animation:fadeDown 0.8s ease both;
+}
+.hero-badge i{font-size:0.7rem;}
+
+.hero h1{
+  font-family:'Tiro Bangla',serif;
+  font-size:clamp(2.2rem,5vw,3.8rem);
+  font-weight:700;
+  color:white;
+  line-height:1.25;
+  margin-bottom:20px;
+  animation:fadeDown 0.8s 0.15s ease both;
+}
+.hero h1 span{
+  color:var(--gold-light);
+  position:relative;display:inline-block;
+}
+.hero h1 span::after{
+  content:'';
+  position:absolute;bottom:-4px;left:0;right:0;height:3px;
+  background:linear-gradient(90deg,var(--gold),transparent);
+  border-radius:2px;
+}
+
+.hero-sub{
+  font-size:1.05rem;color:rgba(255,255,255,0.6);
+  max-width:600px;margin:0 auto 40px;line-height:1.8;
+  animation:fadeDown 0.8s 0.3s ease both;
+}
+
+.hero-btns{
+  display:flex;gap:14px;justify-content:center;flex-wrap:wrap;
+  animation:fadeDown 0.8s 0.45s ease both;
+}
+.btn-primary{
+  padding:14px 32px;
+  background:linear-gradient(135deg,var(--gold),var(--gold-light));
+  color:var(--navy);font-weight:700;font-size:0.9rem;
+  border:none;border-radius:8px;
+  display:inline-flex;align-items:center;gap:8px;
+  transition:transform 0.2s,box-shadow 0.2s;
+  box-shadow:0 4px 20px rgba(212,147,10,0.35);
+}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(212,147,10,0.45);}
+.btn-secondary{
+  padding:14px 32px;
+  background:rgba(255,255,255,0.08);
+  color:white;font-weight:600;font-size:0.9rem;
+  border:1px solid rgba(255,255,255,0.2);border-radius:8px;
+  display:inline-flex;align-items:center;gap:8px;
+  transition:background 0.2s,transform 0.2s;
+  backdrop-filter:blur(8px);
+}
+.btn-secondary:hover{background:rgba(255,255,255,0.14);transform:translateY(-2px);}
+
+/* Stats Bar */
+.stats-bar{
+  display:flex;justify-content:center;gap:48px;flex-wrap:wrap;
+  margin-top:60px;padding-top:40px;
+  border-top:1px solid rgba(255,255,255,0.08);
+  animation:fadeDown 0.8s 0.6s ease both;
+}
+.stat-item{text-align:center;}
+.stat-item .num{
+  font-family:'Tiro Bangla',serif;
+  font-size:2rem;font-weight:700;color:var(--gold-light);
+  display:block;
+}
+.stat-item .label{font-size:0.78rem;color:rgba(255,255,255,0.5);margin-top:2px;}
+
+/* Features Section */
+.features{
+  padding:80px 40px;
+  position:relative;z-index:1;
+  background:linear-gradient(to bottom,var(--navy),var(--navy2));
+}
+.features-inner{max-width:1080px;margin:0 auto;}
+.section-label{
+  text-align:center;margin-bottom:48px;
+}
+.section-label h2{
+  font-family:'Tiro Bangla',serif;
+  font-size:2rem;color:white;margin-bottom:10px;
+}
+.section-label p{color:rgba(255,255,255,0.5);font-size:0.95rem;}
+.section-label .underline-gold{
+  width:60px;height:3px;background:var(--gold);
+  border-radius:2px;margin:12px auto 0;
+}
+
+.features-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px;
+}
+.feature-card{
+  background:rgba(255,255,255,0.04);
+  border:1px solid rgba(255,255,255,0.08);
+  border-radius:var(--radius);padding:28px;
+  transition:transform 0.2s,background 0.2s,border-color 0.2s;
+}
+.feature-card:hover{
+  transform:translateY(-4px);
+  background:rgba(255,255,255,0.07);
+  border-color:rgba(212,147,10,0.3);
+}
+.feature-icon{
+  width:48px;height:48px;border-radius:10px;
+  background:linear-gradient(135deg,rgba(212,147,10,0.2),rgba(212,147,10,0.05));
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.3rem;color:var(--gold-light);margin-bottom:16px;
+  border:1px solid rgba(212,147,10,0.2);
+}
+.feature-card h3{font-size:0.95rem;font-weight:700;color:white;margin-bottom:8px;}
+.feature-card p{font-size:0.82rem;color:rgba(255,255,255,0.5);line-height:1.7;}
+
+/* CTA Section */
+.landing-cta{
+  padding:80px 40px;text-align:center;
+  background:linear-gradient(135deg,var(--navy2),#0a1e33);
+  position:relative;z-index:1;
+  border-top:1px solid rgba(212,147,10,0.15);
+}
+.landing-cta h2{font-family:'Tiro Bangla',serif;font-size:2rem;color:white;margin-bottom:12px;}
+.landing-cta p{color:rgba(255,255,255,0.55);margin-bottom:32px;font-size:0.95rem;}
+
+/* Scroll indicator */
+.scroll-hint{
+  position:absolute;bottom:30px;left:50%;transform:translateX(-50%);
+  color:rgba(255,255,255,0.3);font-size:0.75rem;text-align:center;
+  animation:bounceY 2s ease-in-out infinite;z-index:2;
+}
+.scroll-hint i{display:block;margin-top:6px;font-size:1rem;}
+@keyframes bounceY{0%,100%{transform:translateX(-50%) translateY(0);}50%{transform:translateX(-50%) translateY(-8px);}}
+
+/* Animations */
+@keyframes fadeDown{from{opacity:0;transform:translateY(-20px);}to{opacity:1;transform:translateY(0);}}
+
+/* ══════════════════════════════════════════════════
+   ADMIN TOP NAV
+══════════════════════════════════════════════════ */
+#admin,#blog{display:none;}
+#admin.active,#blog.active{display:block;}
+
+.top-bar{
+  position:sticky;top:0;z-index:200;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:10px 20px;
+  background:white;
+  border-bottom:3px solid var(--gold);
+  box-shadow:0 2px 10px rgba(0,0,0,0.07);
+}
+.top-bar-brand h1{font-size:1rem;font-weight:700;color:var(--navy);}
+.top-bar-brand p{font-size:0.68rem;color:var(--gray-400);}
+.top-bar-tabs{display:flex;gap:8px;}
+.tab-btn{
+  display:inline-flex;align-items:center;gap:6px;
+  padding:7px 14px;border-radius:6px;border:none;
+  font-size:0.8rem;font-weight:600;
+  transition:all 0.2s;
+}
+.tab-btn.active{background:var(--navy);color:white;}
+.tab-btn.inactive{background:var(--gray-100);color:var(--gray-600);}
+.tab-btn.inactive:hover{background:var(--gray-200);}
+.back-to-landing{
+  padding:6px 12px;border:1px solid var(--gray-200);
+  border-radius:6px;background:none;font-size:0.75rem;
+  color:var(--gray-600);display:flex;align-items:center;gap:5px;
+  transition:all 0.2s;
+}
+.back-to-landing:hover{background:var(--gray-100);color:var(--navy);}
+
+/* ══════════════════════════════════════════════════
+   ADMIN EDITOR
+══════════════════════════════════════════════════ */
+.editor-wrap{max-width:900px;margin:20px auto;padding:0 16px 60px;}
+.editor-card{background:white;border-radius:12px;border:1px solid var(--gray-200);padding:22px;box-shadow:var(--shadow);}
+.editor-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;}
+.editor-header h2{font-size:1rem;font-weight:700;color:var(--text);}
+.reset-btn{font-size:0.75rem;color:var(--danger);background:none;border:none;cursor:pointer;text-decoration:underline;}
+
+/* Section boxes */
+.sec-box{margin-bottom:12px;border:1px solid #d1d5db;border-radius:6px;overflow:hidden;}
+.sec-title{
+  padding:7px 12px;font-size:0.7rem;font-weight:800;
+  text-transform:uppercase;letter-spacing:0.05em;
+  color:var(--gray-600);background:#eef0f4;
+  border-bottom:1px solid #d1d5db;
+}
+.sec-body{padding:8px;}
+
+.grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:12px;}
+.grid-main{display:grid;grid-template-columns:2fr 1fr;gap:12px;}
+
+/* Widget Card */
+.wcard{
+  display:flex;align-items:center;gap:8px;
+  padding:9px 10px;background:white;
+  border:1px solid var(--gray-200);
+  border-radius:5px;margin-bottom:6px;
+  transition:all 0.15s;
+}
+.wcard.off{background:#f9fafb;border-style:dashed;opacity:0.6;}
+.wcard .wname{
+  flex:1;font-size:0.82rem;font-weight:500;color:var(--text);overflow:hidden;white-space:nowrap;text-overflow:ellipsis;
+}
+.wcard.off .wname{color:#9ca3af;text-decoration:line-through;}
+.ico-btn{
+  background:none;border:none;cursor:pointer;
+  padding:4px;border-radius:4px;
+  display:flex;align-items:center;
+  color:var(--gray-600);
+  transition:background 0.15s;font-size:0.85rem;
+}
+.ico-btn:hover{background:var(--gray-100);}
+.ico-btn.red{color:var(--danger);}
+.ico-btn.red:hover{background:#fee2e2;}
+
+/* Drag */
+.drag-wrap{position:relative;padding-left:28px;}
+.drag-wrap.dragging{opacity:0.35;}
+.drag-handle{
+  position:absolute;left:4px;top:50%;transform:translateY(-50%);
+  color:#9ca3af;cursor:grab;font-size:0.9rem;
+}
+
+/* Post Manager */
+.pm{margin-top:10px;padding:12px;background:white;border:1px solid var(--gray-200);border-radius:6px;}
+.pm-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;}
+.pm-header h3{font-size:0.83rem;font-weight:700;}
+.pm-new-btn{
+  display:inline-flex;align-items:center;gap:5px;
+  padding:6px 12px;background:var(--navy);color:white;
+  border:none;border-radius:5px;font-size:0.77rem;font-weight:600;
+  transition:background 0.2s;
+}
+.pm-new-btn:hover{background:var(--blue-light);}
+.pm-form{padding:12px;background:#f0f6ff;border:1px solid #bfdbfe;border-radius:6px;margin-bottom:10px;}
+.pm-form label{font-size:0.72rem;color:var(--gray-600);display:block;margin-bottom:3px;font-weight:600;}
+.pm-form input,.pm-form textarea,.pm-form select{
+  width:100%;padding:8px 10px;margin-bottom:8px;
+  border:1px solid var(--gray-200);border-radius:5px;
+  font-size:0.83rem;outline:none;
+  transition:border-color 0.2s;background:white;
+}
+.pm-form input:focus,.pm-form textarea:focus{border-color:var(--blue-light);box-shadow:0 0 0 3px rgba(37,99,168,0.1);}
+
+/* Image Upload */
+.img-upload-box{
+  border:2px dashed var(--gray-200);border-radius:8px;
+  padding:16px;text-align:center;cursor:pointer;
+  transition:border-color 0.2s,background 0.2s;
+  background:#fafbfc;margin-bottom:8px;
+  position:relative;
+}
+.img-upload-box:hover{border-color:var(--blue-light);background:#f0f6ff;}
+.img-upload-box input[type=file]{
+  position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:pointer;
+}
+.img-upload-box .up-icon{font-size:1.6rem;color:var(--gray-400);margin-bottom:6px;}
+.img-upload-box p{font-size:0.78rem;color:var(--gray-400);}
+.img-preview-thumb{
+  width:100%;max-height:140px;object-fit:cover;
+  border-radius:6px;margin-top:8px;border:1px solid var(--gray-200);
+  display:none;
+}
+
+.pm-form-btns{display:flex;justify-content:flex-end;gap:8px;margin-top:4px;}
+.btn-cancel{padding:6px 12px;background:none;border:1px solid var(--gray-200);border-radius:5px;font-size:0.8rem;color:var(--gray-600);}
+.btn-cancel:hover{background:var(--gray-100);}
+.btn-publish{padding:6px 14px;background:var(--success);color:white;border:none;border-radius:5px;font-size:0.8rem;font-weight:600;}
+.btn-publish:hover{background:#15803d;}
+
+/* Post list */
+.post-item{
+  display:flex;align-items:center;gap:8px;
+  padding:8px 10px;background:var(--gray-50);
+  border:1px solid var(--gray-200);border-radius:5px;margin-bottom:6px;
+}
+.post-item img{
+  width:38px;height:38px;object-fit:cover;border-radius:4px;flex-shrink:0;
+  display:none;border:1px solid var(--gray-200);
+}
+.post-item img.has-img{display:block;}
+.post-item-info{flex:1;overflow:hidden;}
+.post-item-title{font-size:0.82rem;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.post-item-meta{font-size:0.68rem;color:var(--gray-400);margin-top:1px;}
+.post-item-actions{display:flex;gap:6px;flex-shrink:0;}
+
+/* Add gadget btn */
+.add-gadget-btn{
+  display:flex;align-items:center;justify-content:center;gap:6px;
+  width:100%;padding:9px;margin-bottom:8px;
+  background:white;border:1.5px dashed #93c5fd;
+  border-radius:5px;color:#3b82f6;
+  font-size:0.78rem;font-weight:600;
+  transition:background 0.2s;
+}
+.add-gadget-btn:hover{background:#eff6ff;}
+
+/* ══════════════════════════════════════════════════
+   MODAL
+══════════════════════════════════════════════════ */
+.modal-backdrop{
+  position:fixed;inset:0;background:rgba(0,0,0,0.5);
+  z-index:999;display:none;align-items:center;justify-content:center;padding:16px;
+  backdrop-filter:blur(4px);
+}
+.modal-backdrop.open{display:flex;}
+.modal-box{
+  background:white;border-radius:12px;padding:24px;
+  width:100%;max-width:440px;
+  box-shadow:0 24px 64px rgba(0,0,0,0.2);
+  animation:modalIn 0.25s ease;
+}
+@keyframes modalIn{from{opacity:0;transform:translateY(16px);}to{opacity:1;transform:translateY(0);}}
+.modal-box h3{font-size:1rem;font-weight:700;color:var(--text);margin-bottom:16px;display:flex;align-items:center;gap:8px;}
+.modal-box label{font-size:0.72rem;color:var(--gray-600);display:block;margin-bottom:4px;font-weight:600;}
+.modal-box input,.modal-box textarea{
+  width:100%;padding:8px 10px;margin-bottom:12px;
+  border:1px solid var(--gray-200);border-radius:6px;
+  font-size:0.85rem;outline:none;
+}
+.modal-box input:focus,.modal-box textarea:focus{border-color:var(--blue-light);}
+.modal-btns{display:flex;justify-content:flex-end;gap:8px;}
+.btn-save{
+  padding:8px 18px;background:var(--navy);color:white;
+  border:none;border-radius:6px;font-size:0.82rem;font-weight:600;
+}
+.btn-save:hover{background:var(--blue-light);}
+
+/* Confirm modal */
+.confirm-modal{max-width:360px;}
+.confirm-modal p{font-size:0.88rem;color:var(--gray-600);margin-bottom:18px;line-height:1.6;}
+.btn-danger{padding:8px 18px;background:var(--danger);color:white;border:none;border-radius:6px;font-size:0.82rem;font-weight:600;}
+
+/* ══════════════════════════════════════════════════
+   ██████  BLOG PREVIEW PAGE
+══════════════════════════════════════════════════ */
+/* Blog Header */
+.blog-header{
+  background:linear-gradient(135deg,var(--navy) 0%,#0a1e33 100%);
+  border-bottom:4px solid var(--gold);
+  padding:0 20px;
+}
+.blog-header-inner{
+  max-width:1080px;margin:0 auto;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:16px 0;
+}
+.blog-logo-area .blog-logo{
+  font-family:'Tiro Bangla',serif;
+  font-size:1.5rem;font-weight:700;
+  color:var(--gold-light);
+}
+.blog-logo-area .blog-tagline{
+  font-size:0.68rem;color:rgba(255,255,255,0.45);
+  margin-top:1px;letter-spacing:0.04em;
+}
+.blog-nav-links{display:flex;gap:20px;}
+.blog-nav-links a{
+  font-size:0.82rem;color:rgba(255,255,255,0.65);
+  font-weight:500;transition:color 0.2s;
+  display:flex;align-items:center;gap:5px;
+}
+.blog-nav-links a:hover{color:var(--gold-light);}
+
+/* Blog Banner */
+.blog-banner{
+  background:radial-gradient(ellipse at 60% 50%, #1a3d6e 0%, var(--navy) 70%);
+  padding:56px 20px;text-align:center;
+  border-bottom:1px solid rgba(255,255,255,0.06);
+}
+.blog-banner h2{
+  font-family:'Tiro Bangla',serif;
+  font-size:clamp(1.6rem,4vw,2.5rem);
+  color:var(--gold-light);margin-bottom:12px;
+}
+.blog-banner p{
+  font-size:0.95rem;color:rgba(255,255,255,0.55);
+  max-width:540px;margin:0 auto;line-height:1.8;
+}
+
+/* Blog body */
+.blog-body-wrap{max-width:1080px;margin:32px auto 0;padding:0 16px 60px;}
+.blog-layout{display:grid;grid-template-columns:1fr 290px;gap:28px;}
+.section-heading{
+  font-size:0.68rem;font-weight:800;
+  text-transform:uppercase;letter-spacing:0.08em;
+  color:var(--blue);
+  border-left:3px solid var(--gold);
+  padding-left:8px;margin-bottom:20px;
+}
+
+/* Post Card */
+.post-card{
+  background:white;border:1px solid var(--gray-200);
+  border-radius:var(--radius);overflow:hidden;
+  box-shadow:var(--shadow);margin-bottom:20px;
+  transition:transform 0.2s,box-shadow 0.2s;
+}
+.post-card:hover{transform:translateY(-3px);box-shadow:var(--shadow-lg);}
+.post-card-img{
+  width:100%;height:200px;object-fit:cover;
+  background:linear-gradient(135deg,var(--gray-100),var(--gray-200));
+  display:flex;align-items:center;justify-content:center;
+  font-size:2rem;color:var(--gray-400);
+}
+.post-card-img img{width:100%;height:100%;object-fit:cover;}
+.post-card-body{padding:20px 22px;}
+.post-cat{
+  display:inline-block;font-size:0.66rem;font-weight:700;
+  text-transform:uppercase;letter-spacing:0.06em;
+  color:var(--blue-light);background:#eff6ff;
+  padding:2px 8px;border-radius:20px;margin-bottom:8px;
+}
+.post-card h4{
+  font-family:'Tiro Bangla',serif;
+  font-size:1.1rem;font-weight:700;
+  color:var(--navy);margin-bottom:8px;line-height:1.45;
+}
+.post-meta-row{
+  display:flex;gap:14px;
+  font-size:0.7rem;color:var(--gray-400);margin-bottom:10px;
+}
+.post-meta-row span{display:flex;align-items:center;gap:4px;}
+.post-excerpt{font-size:0.87rem;color:var(--gray-600);line-height:1.75;margin-bottom:14px;}
+.read-more-btn{
+  display:inline-flex;align-items:center;gap:6px;
+  padding:7px 16px;background:var(--navy);color:white;
+  border:none;border-radius:6px;font-size:0.78rem;font-weight:600;
+  transition:background 0.2s;
+}
+.read-more-btn:hover{background:var(--blue-light);}
+
+/* Single Post */
+.single-post{
+  background:white;border:1px solid var(--gray-200);
+  border-radius:var(--radius);padding:28px 30px;
+  box-shadow:var(--shadow);
+}
+.back-btn{
+  display:inline-flex;align-items:center;gap:5px;
+  background:none;border:none;
+  color:var(--blue-light);font-size:0.82rem;font-weight:600;
+  margin-bottom:18px;padding:0;
+}
+.back-btn:hover{color:var(--navy);}
+.single-post-img{
+  width:100%;max-height:320px;object-fit:cover;
+  border-radius:8px;margin-bottom:20px;
+  display:none;
+}
+.single-post-img.visible{display:block;}
+.single-post h2{
+  font-family:'Tiro Bangla',serif;
+  font-size:1.5rem;font-weight:700;
+  color:var(--navy);margin-bottom:10px;line-height:1.4;
+}
+.single-meta{
+  display:flex;gap:16px;font-size:0.72rem;
+  color:var(--gray-400);padding:10px 0 18px;
+  border-bottom:1px solid var(--gray-200);margin-bottom:20px;
+}
+.single-content{
+  font-size:0.95rem;color:var(--gray-700);
+  line-height:1.9;white-space:pre-wrap;
+}
+
+/* No posts */
+.no-posts{
+  text-align:center;padding:48px 20px;
+  background:white;border-radius:var(--radius);
+  border:1.5px dashed var(--gray-200);
+  color:var(--gray-400);
+}
+.no-posts i{font-size:2.5rem;display:block;margin-bottom:12px;color:var(--gray-200);}
+.no-posts p{font-size:0.88rem;}
+
+/* Sidebar */
+.sidebar{display:flex;flex-direction:column;gap:16px;}
+.sidebar-widget{
+  background:white;border:1px solid var(--gray-200);
+  border-radius:8px;overflow:hidden;
+}
+.sw-title{
+  padding:10px 14px;
+  background:var(--navy);
+  color:white;
+  font-size:0.7rem;font-weight:800;
+  text-transform:uppercase;letter-spacing:0.06em;
+  border-bottom:2px solid var(--gold);
+  display:flex;align-items:center;gap:7px;
+}
+.sw-body{padding:12px 14px;}
+.sw-body p{font-size:0.82rem;color:var(--gray-600);line-height:1.65;}
+.sw-link{
+  display:flex;align-items:center;gap:7px;
+  font-size:0.82rem;color:var(--blue-light);
+  padding:5px 0;border-bottom:1px solid var(--gray-100);
+  cursor:pointer;transition:color 0.2s;
+}
+.sw-link:last-child{border-bottom:none;}
+.sw-link:hover{color:var(--gold);}
+.tag-pill{
+  display:inline-block;margin:3px;
+  padding:3px 9px;background:var(--gray-100);
+  border:1px solid var(--gray-200);border-radius:20px;
+  font-size:0.72rem;color:var(--gray-600);cursor:pointer;
+  transition:all 0.15s;
+}
+.tag-pill:hover{background:var(--navy);color:white;border-color:var(--navy);}
+.sub-form{display:flex;gap:6px;margin-top:8px;}
+.sub-form input{
+  flex:1;padding:7px 10px;border:1px solid var(--gray-200);
+  border-radius:5px;font-size:0.78rem;outline:none;
+}
+.sub-form button{
+  padding:7px 12px;background:var(--gold);
+  color:var(--navy);border:none;border-radius:5px;
+  font-size:0.77rem;font-weight:700;
+}
+.search-row{display:flex;gap:6px;}
+.search-row input{
+  flex:1;padding:7px 10px;border:1px solid var(--gray-200);
+  border-radius:5px;font-size:0.78rem;outline:none;
+}
+.search-row button{
+  padding:7px 10px;background:var(--navy);color:white;
+  border:none;border-radius:5px;font-size:0.82rem;
+}
+
+/* Blog Footer */
+.blog-footer{
+  background:#0a1e33;color:rgba(255,255,255,0.55);
+  padding:32px 20px 20px;text-align:center;
+  margin-top:20px;
+}
+.footer-links{
+  display:flex;justify-content:center;gap:24px;
+  flex-wrap:wrap;margin-bottom:16px;
+}
+.footer-links a{
+  font-size:0.82rem;color:rgba(255,255,255,0.6);
+  display:flex;align-items:center;gap:5px;
+  transition:color 0.2s;
+}
+.footer-links a:hover{color:var(--gold-light);}
+.footer-copy{font-size:0.7rem;color:rgba(255,255,255,0.3);}
+
+/* ══════════════════════════════════════════════════
+   TOAST NOTIFICATION
+══════════════════════════════════════════════════ */
+.toast{
+  position:fixed;bottom:24px;right:24px;z-index:9999;
+  padding:12px 20px;background:var(--navy);color:white;
+  border-radius:8px;font-size:0.82rem;font-weight:600;
+  box-shadow:var(--shadow-lg);
+  transform:translateY(60px);opacity:0;
+  transition:all 0.3s ease;
+  display:flex;align-items:center;gap:10px;
+  border-left:3px solid var(--gold);
+}
+.toast.show{transform:translateY(0);opacity:1;}
+.toast.success{border-left-color:#22c55e;}
+.toast.error{border-left-color:var(--danger);}
+
+/* ══════════════════════════════════════════════════
+   RESPONSIVE
+══════════════════════════════════════════════════ */
+@media(max-width:768px){
+  .landing-nav{padding:12px 16px;}
+  .landing-nav-links{display:none;}
+  .hero{padding:100px 20px 50px;}
+  .stats-bar{gap:24px;}
+  .features{padding:50px 20px;}
+  .landing-cta{padding:50px 20px;}
+  .grid-3{grid-template-columns:1fr;}
+  .grid-main{grid-template-columns:1fr;}
+  .blog-layout{grid-template-columns:1fr;}
+  .blog-nav-links{display:none;}
+  .top-bar{flex-wrap:wrap;gap:8px;}
+}
+</style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════════════
+     LANDING PAGE
+══════════════════════════════════════════════════ -->
+<div id="landing" class="page active">
+
+  <!-- Nav -->
+  <nav class="landing-nav">
+    <div class="landing-logo">
+      <span class="dot"></span>
+      অর্থনীতি ব্লগ
+    </div>
+    <div class="landing-nav-links">
+      <a href="#">হোম</a>
+      <a href="#">পোস্টসমূহ</a>
+      <a href="#">পরিচিতি</a>
+      <a href="#">যোগাযোগ</a>
+      <a class="nav-cta" onclick="goToAdmin()" style="cursor:pointer;">
+        <i class="fa fa-lock" style="font-size:0.7rem;"></i> অ্যাডমিন প্যানেল
+      </a>
+    </div>
+    <button onclick="goToAdmin()" class="btn-primary" style="display:none;" id="mob-admin-btn">অ্যাডমিন</button>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-inner">
+      <div class="hero-badge">
+        <i class="fa fa-star"></i>
+        শিক্ষামূলক ব্লগ প্ল্যাটফর্ম
+      </div>
+      <h1>
+        অর্থনীতি শিখুন,<br/>
+        <span>স্বাবলম্বী হন</span>
+      </h1>
+      <p class="hero-sub">
+        মঞ্জুরুল হক স্যারের গাইডেন্সে অর্থনীতির জটিল বিষয়গুলো সহজ ভাষায় বুঝুন।
+        ফ্রিল্যান্সিং, ডিজিটাল অর্থনীতি এবং ব্যক্তিগত অর্থায়নে দক্ষ হয়ে উঠুন।
+      </p>
+      <div class="hero-btns">
+        <button class="btn-primary" onclick="goToBlog()">
+          <i class="fa fa-newspaper"></i> ব্লগ পড়ুন
+        </button>
+        <button class="btn-secondary" onclick="goToAdmin()">
+          <i class="fa fa-cog"></i> অ্যাডমিন প্যানেল
+        </button>
+      </div>
+
+      <div class="stats-bar">
+        <div class="stat-item">
+          <span class="num" id="stat-posts">০</span>
+          <span class="label">মোট পোস্ট</span>
+        </div>
+        <div class="stat-item">
+          <span class="num">৫০০+</span>
+          <span class="label">শিক্ষার্থী</span>
+        </div>
+        <div class="stat-item">
+          <span class="num">৩+</span>
+          <span class="label">বছরের অভিজ্ঞতা</span>
+        </div>
+        <div class="stat-item">
+          <span class="num">১০০%</span>
+          <span class="label">বিনামূল্যে</span>
+        </div>
+      </div>
+    </div>
+    <div class="scroll-hint">
+      নিচে স্ক্রল করুন
+      <i class="fa fa-chevron-down"></i>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section class="features">
+    <div class="features-inner">
+      <div class="section-label">
+        <h2>কেন আমাদের ব্লগ?</h2>
+        <p>শিক্ষার্থীদের কথা মাথায় রেখে তৈরি করা বিশেষ কন্টেন্ট</p>
+        <div class="underline-gold"></div>
+      </div>
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon"><i class="fa fa-book-open"></i></div>
+          <h3>সহজ ভাষায় শিক্ষা</h3>
+          <p>কঠিন অর্থনীতিকে আমরা সহজ বাংলায় ব্যাখ্যা করি যাতে সবাই বুঝতে পারে।</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon"><i class="fa fa-laptop-code"></i></div>
+          <h3>ফ্রিল্যান্সিং গাইড</h3>
+          <p>AI ও আধুনিক প্রযুক্তি ব্যবহার করে আয়ের সুযোগ তৈরির সম্পূর্ণ গাইডলাইন।</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon"><i class="fa fa-chart-line"></i></div>
+          <h3>অর্থনীতি বিশ্লেষণ</h3>
+          <p>দেশীয় ও বৈশ্বিক অর্থনীতির সাম্প্রতিক আপডেট ও গভীর বিশ্লেষণ।</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon"><i class="fa fa-users"></i></div>
+          <h3>শিক্ষার্থী সম্প্রদায়</h3>
+          <p>হাজারো শিক্ষার্থীর সাথে যুক্ত হন এবং একসাথে শিখুন ও বেড়ে উঠুন।</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="landing-cta">
+    <h2>এখনই শুরু করুন</h2>
+    <p>জ্ঞানের যাত্রায় পিছিয়ে থাকবেন না — আজই পড়ুন, শিখুন এবং এগিয়ে যান।</p>
+    <div class="hero-btns">
+      <button class="btn-primary" onclick="goToBlog()">
+        <i class="fa fa-arrow-right"></i> ব্লগে যান
+      </button>
+      <button class="btn-secondary" onclick="goToAdmin()">
+        <i class="fa fa-edit"></i> পোস্ট লিখুন
+      </button>
+    </div>
+  </section>
+
+  <!-- Orbs -->
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+  <div class="orb orb-3"></div>
+</div>
+
+<!-- ══════════════════════════════════════════════════
+     ADMIN PANEL
+══════════════════════════════════════════════════ -->
+<div id="admin">
+  <!-- Top Bar -->
+  <div class="top-bar">
+    <div class="top-bar-brand">
+      <h1>📊 অর্থনীতি ব্লগ — অ্যাডমিন প্যানেল</h1>
+      <p>মঞ্জুরুল হক স্যার</p>
+    </div>
+    <div class="top-bar-tabs">
+      <button class="tab-btn active" id="tab-editor" onclick="switchAdminTab('editor')">
+        <i class="fa fa-th-large"></i> লেআউট এডিটর
+      </button>
+      <button class="tab-btn inactive" id="tab-preview" onclick="switchAdminTab('preview')">
+        <i class="fa fa-eye"></i> ব্লগ প্রিভিউ
+      </button>
+      <button class="back-to-landing" onclick="goToLanding()">
+        <i class="fa fa-home"></i> হোম
+      </button>
+    </div>
+  </div>
+
+  <!-- Editor -->
+  <div id="admin-editor">
+    <div class="editor-wrap">
+      <div class="editor-card">
+        <div class="editor-header">
+          <h2>📐 পেজ লেআউট ম্যানেজার</h2>
+          <button class="reset-btn" onclick="resetAll()">↺ ডিফল্টে রিসেট করুন</button>
+        </div>
+
+        <!-- Theme Options -->
+        <div class="sec-box">
+          <div class="sec-title">Theme Options</div>
+          <div class="sec-body" id="sec-theme"></div>
+        </div>
+
+        <!-- Header -->
+        <div class="grid-3">
+          <div class="sec-box">
+            <div class="sec-title">Header Logo</div>
+            <div class="sec-body" id="sec-logo"></div>
+          </div>
+          <div class="sec-box">
+            <div class="sec-title">Scrolling Menu</div>
+            <div class="sec-body" id="sec-scroll"></div>
+          </div>
+          <div class="sec-box">
+            <div class="sec-title">Main Menu</div>
+            <div class="sec-body" id="sec-menu"></div>
+          </div>
+        </div>
+
+        <!-- Main Intro -->
+        <div class="sec-box">
+          <div class="sec-title">Main Intro Banner</div>
+          <div class="sec-body" id="sec-intro"></div>
+        </div>
+
+        <!-- Main + Sidebar -->
+        <div class="grid-main">
+          <!-- Main Content -->
+          <div>
+            <div class="sec-box">
+              <div class="sec-title">Headline Text</div>
+              <div class="sec-body" id="sec-headline"></div>
+            </div>
+            <div class="sec-box">
+              <div class="sec-title">Main Posts</div>
+              <div class="sec-body" id="sec-posts-widget">
+                <!-- Post manager injected here -->
+              </div>
+            </div>
+          </div>
+
+          <!-- Sidebar -->
+          <div>
+            <div class="sec-box">
+              <div class="sec-title">Sidebar Right</div>
+              <div class="sec-body">
+                <button class="add-gadget-btn" onclick="openAddGadgetModal()">
+                  <i class="fa fa-plus"></i> নতুন গ্যাজেট যোগ করুন
+                </button>
+                <div id="sidebar-list"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="sec-box">
+          <div class="sec-title">Footer Navigation</div>
+          <div class="sec-body" id="sec-footer"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Preview (within admin) -->
+  <div id="admin-preview" style="display:none;">
+    <div id="blog-preview-content"></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════
+     MODAL: Edit Widget
+══════════════════════════════════════════════════ -->
+<div class="modal-backdrop" id="edit-modal">
+  <div class="modal-box">
+    <h3><i class="fa fa-pencil" style="color:var(--blue-light);"></i> সম্পাদনা করুন</h3>
+    <label>নাম / শিরোনাম</label>
+    <input type="text" id="modal-title-input" placeholder="নাম লিখুন..."/>
+    <div id="modal-content-wrap" style="display:none;">
+      <label>কন্টেন্ট (ঐচ্ছিক)</label>
+      <textarea id="modal-content-input" rows="3" placeholder="কন্টেন্ট লিখুন..."></textarea>
+    </div>
+    <div class="modal-btns">
+      <button class="btn-cancel" onclick="closeModal('edit-modal')">বাতিল</button>
+      <button class="btn-save" onclick="saveModal()">✓ সেভ করুন</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: Add Gadget -->
+<div class="modal-backdrop" id="add-gadget-modal">
+  <div class="modal-box">
+    <h3><i class="fa fa-plus-circle" style="color:var(--gold);"></i> নতুন গ্যাজেট</h3>
+    <label>গ্যাজেটের নাম</label>
+    <input type="text" id="gadget-name-input" placeholder="যেমন: Recent Comments"/>
+    <label>কন্টেন্ট (ঐচ্ছিক)</label>
+    <textarea id="gadget-content-input" rows="3" placeholder="গ্যাজেটের কন্টেন্ট..."></textarea>
+    <div class="modal-btns">
+      <button class="btn-cancel" onclick="closeModal('add-gadget-modal')">বাতিল</button>
+      <button class="btn-save" onclick="addGadget()">✓ যোগ করুন</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: Confirm Delete -->
+<div class="modal-backdrop" id="confirm-modal">
+  <div class="modal-box confirm-modal">
+    <h3><i class="fa fa-exclamation-triangle" style="color:var(--danger);"></i> নিশ্চিত করুন</h3>
+    <p id="confirm-msg">আপনি কি নিশ্চিত?</p>
+    <div class="modal-btns">
+      <button class="btn-cancel" onclick="closeModal('confirm-modal')">না</button>
+      <button class="btn-danger" id="confirm-ok-btn">হ্যাঁ, মুছুন</button>
+    </div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<!-- ══════════════════════════════════════════════════
+     JAVASCRIPT
+══════════════════════════════════════════════════ -->
+<script>
+/* ─── DATA ─────────────────────────────────────── */
+let layout = {
+  themeOptions:    { title:"Main Page", visible:true },
+  headerLogo:      { title:"অর্থনীতি ব্লগ", visible:true },
+  scrollingMenu:   { title:"Menu", visible:true },
+  mainMenu:        { title:"Menu Widget", visible:true },
+  mainIntro:       { title:"Master your Money with Honey", visible:true },
+  headlineText:    { title:"সাম্প্রতিক ব্লগ পোস্ট", visible:true },
+  mainPosts:       { title:"Blog Posts", visible:true },
+  footerNavigation:{ title:"Link List", visible:true },
+  sidebarRight:[
+    {id:"1",  title:"Popular Posts",   visible:true,  content:""},
+    {id:"2",  title:"Projects",        visible:true,  content:""},
+    {id:"3",  title:"Subscribe Us",    visible:true,  content:""},
+    {id:"4",  title:"Categories",      visible:true,  content:""},
+    {id:"5",  title:"Tags",            visible:true,  content:""},
+    {id:"6",  title:"Blog Archive",    visible:true,  content:""},
+    {id:"7",  title:"Featured Post",   visible:true,  content:""},
+    {id:"8",  title:"About Me",        visible:true,  content:""},
+    {id:"9",  title:"Search This Blog",visible:true,  content:""},
+    {id:"10", title:"AdSense",         visible:false, content:""},
+    {id:"11", title:"Contact Form",    visible:true,  content:""},
+    {id:"12", title:"Attribution",     visible:true,  content:""},
+  ]
+};
+
+let posts = [
+  {
+    id:"p1", title:"এআই (AI) এর সাহায্যে কিভাবে ফ্রিল্যান্সিং শুরু করবেন?",
+    content:"বর্তমান সময়ে কৃত্রিম বুদ্ধিমত্তা ব্যবহার করে খুব সহজেই বিভিন্ন অনলাইন কাজ সম্পন্ন করা যায়। শিক্ষার্থীদের জন্য এটি একটি চমৎকার সুযোগ।\n\nChatGPT, Midjourney ইত্যাদি টুলের মাধ্যমে কনটেন্ট রাইটিং, গ্রাফিক্স ডিজাইনের কাজ করা সম্ভব। প্রথমে একটি নির্দিষ্ট বিষয়ে দক্ষতা অর্জন করতে হবে, তারপর ফাইভার বা আপওয়ার্কের মতো মার্কেটপ্লেসে অ্যাকাউন্ট খুলে কাজ শুরু করা যায়।",
+    category:"ফ্রিল্যান্সিং", date:"১২ মার্চ, ২০২৬", readTime:"৫ মিনিট", image:null
+  },
+  {
+    id:"p2", title:"অর্থনীতির মূলনীতি: সহজ ভাষায় ব্যাখ্যা",
+    content:"অর্থনীতি শুনলেই অনেকের ভয় লাগে, কিন্তু সঠিক গাইডলাইন পেলে বিষয়টি অনেক সহজ হয়ে যায়।\n\nচাহিদা ও যোগানের সূত্র থেকে শুরু করে মুদ্রাস্ফীতি পর্যন্ত সবকিছু আমাদের দৈনন্দিন জীবনের সাথেই সম্পর্কিত। বাজেট তৈরি, সঞ্চয় এবং বিনিয়োগের মৌলিক ধারণাগুলো জানা প্রতিটি মানুষের জন্য জরুরি।",
+    category:"অর্থনীতি", date:"১০ মার্চ, ২০২৬", readTime:"৭ মিনিট", image:null
+  },
+  {
+    id:"p3", title:"ডিজিটাল বাংলাদেশ: তরুণ প্রজন্মের সম্ভাবনা",
+    content:"ডিজিটাল বাংলাদেশের স্বপ্ন আজ বাস্তবে রূপ নিচ্ছে। তরুণ প্রজন্ম এখন তথ্যপ্রযুক্তি ব্যবহার করে দেশের উন্নয়নে অবদান রাখছে।\n\nই-কমার্স, ফিনটেক, এবং সফটওয়্যার ইন্ডাস্ট্রিতে বাংলাদেশ ক্রমশ এগিয়ে যাচ্ছে।",
+    category:"প্রযুক্তি", date:"৫ মার্চ, ২০২৬", readTime:"৪ মিনিট", image:null
+  }
+];
+
+let viewingPost = null;
+let draggedIdx  = null;
+let modalSaveCb = null;
+let confirmCb   = null;
+let pendingImgData = null;
+let showPostForm = false;
+
+/* ─── PAGE NAVIGATION ───────────────────────────── */
+function showPage(id) {
+  document.getElementById('landing').style.display = 'none';
+  document.getElementById('admin').style.display   = 'none';
+  if(id==='landing'){
+    document.getElementById('landing').style.display='block';
+    updateStatPosts();
+  } else if(id==='admin'){
+    document.getElementById('admin').style.display='block';
+    renderEditor();
+  }
+}
+function goToLanding(){ showPage('landing'); }
+function goToAdmin()  { showPage('admin');   switchAdminTab('editor'); }
+function goToBlog()   { showPage('admin');   switchAdminTab('preview'); }
+function updateStatPosts(){
+  document.getElementById('stat-posts').textContent = toBengaliNum(posts.length);
+}
+
+/* ─── ADMIN TAB SWITCH ──────────────────────────── */
+function switchAdminTab(tab){
+  const isEditor = tab==='editor';
+  document.getElementById('admin-editor').style.display  = isEditor ? 'block' : 'none';
+  document.getElementById('admin-preview').style.display = isEditor ? 'none'  : 'block';
+  document.getElementById('tab-editor').className = 'tab-btn ' + (isEditor ? 'active' : 'inactive');
+  document.getElementById('tab-preview').className= 'tab-btn ' + (isEditor ? 'inactive' : 'active');
+  if(!isEditor) renderBlogPreview();
+}
+
+/* ─── HELPERS ──────────────────────────────────── */
+function toBengaliNum(n){
+  return String(n).replace(/[0-9]/g,d=>'০১২৩৪৫৬৭৮৯'[d]);
+}
+function toast(msg, type='success'){
+  const t=document.getElementById('toast');
+  t.innerHTML = `<i class="fa fa-${type==='success'?'check-circle':'exclamation-circle'}"></i> ${msg}`;
+  t.className = `toast show ${type}`;
+  setTimeout(()=>t.className='toast',2800);
+}
+function confirm2(msg, cb){
+  document.getElementById('confirm-msg').textContent = msg;
+  confirmCb = cb;
+  openModal('confirm-modal');
+  document.getElementById('confirm-ok-btn').onclick = ()=>{ closeModal('confirm-modal'); cb(); };
+}
+function openModal(id){ document.getElementById(id).classList.add('open'); }
+function closeModal(id){ document.getElementById(id).classList.remove('open'); }
+
+/* ─── RENDER EDITOR ─────────────────────────────── */
+function renderEditor(){
+  renderSimple('sec-theme',   'themeOptions',    null);
+  renderSimple('sec-logo',    'headerLogo',      null);
+  renderSimple('sec-scroll',  'scrollingMenu',   null);
+  renderSimple('sec-menu',    'mainMenu',        null);
+  renderSimple('sec-intro',   'mainIntro',       null);
+  renderSimple('sec-headline','headlineText',    null);
+  renderSimple('sec-footer',  'footerNavigation',null);
+  renderPostsWidget();
+  renderSidebar();
+}
+
+function renderSimple(containerId, key, _){
+  const el = document.getElementById(containerId);
+  if(!el) return;
+  const item = layout[key];
+  el.innerHTML = widgetCardHTML(item.title, item.visible, key, null, null, false);
+}
+
+function widgetCardHTML(title, visible, key, path, id, deletable){
+  const off = !visible;
+  return `<div class="wcard ${off?'off':''}" id="wcard-${id||key}">
+    <button class="ico-btn" onclick="toggleVis('${key}','${path||''}','${id||''}')" title="${visible?'লুকান':'দেখান'}">
+      <i class="fa ${visible?'fa-eye':'fa-eye-slash'}"></i>
+    </button>
+    <span class="wname">${title}</span>
+    <button class="ico-btn" onclick="openEditModal('${key}','${path||''}','${id||''}','${escQ(title)}','${escQ((id?getSidebarItem(id)?.content:'') ||'')}',${!!id})" title="সম্পাদনা">
+      <i class="fa fa-pencil"></i>
+    </button>
+    ${deletable ? `<button class="ico-btn red" onclick="deleteGadget('${id}')" title="মুছুন"><i class="fa fa-trash"></i></button>` : ''}
+  </div>`;
+}
+function escQ(s){ return (s||'').replace(/'/g,"&#39;"); }
+function getSidebarItem(id){ return layout.sidebarRight.find(w=>w.id===id); }
+
+/* ─── SIDEBAR ────────────────────────────────────── */
+function renderSidebar(){
+  const list = document.getElementById('sidebar-list');
+  list.innerHTML = '';
+  layout.sidebarRight.forEach((w,idx)=>{
+    const div = document.createElement('div');
+    div.className = `drag-wrap ${draggedIdx===idx?'dragging':''}`;
+    div.draggable = true;
+    div.dataset.idx = idx;
+    div.innerHTML = `
+      <div class="drag-handle"><i class="fa fa-grip-vertical"></i></div>
+      ${widgetCardHTML(w.title,w.visible,'sidebarRight','',w.id,true)}
+    `;
+    div.addEventListener('dragstart',()=>{ draggedIdx=idx; });
+    div.addEventListener('dragenter',(e)=>{ e.preventDefault(); dragEnter(idx); });
+    div.addEventListener('dragover',(e)=>e.preventDefault());
+    div.addEventListener('dragend',()=>{ draggedIdx=null; renderSidebar(); });
+    list.appendChild(div);
+  });
+}
+
+function dragEnter(toIdx){
+  if(draggedIdx===null||draggedIdx===toIdx) return;
+  const arr = [...layout.sidebarRight];
+  const item = arr.splice(draggedIdx,1)[0];
+  arr.splice(toIdx,0,item);
+  layout.sidebarRight = arr;
+  draggedIdx = toIdx;
+  renderSidebar();
+}
+
+/* ─── POSTS WIDGET ──────────────────────────────── */
+function renderPostsWidget(){
+  const el = document.getElementById('sec-posts-widget');
+  const item = layout['mainPosts'];
+  let html = widgetCardHTML(item.title, item.visible, 'mainPosts', null, null, false);
+
+  if(item.visible){
+    html += `<div class="pm">
+      <div class="pm-header">
+        <h3>📝 পোস্টসমূহ (${toBengaliNum(posts.length)}টি)</h3>
+        <button class="pm-new-btn" onclick="togglePostForm()">
+          <i class="fa ${showPostForm?'fa-times':'fa-plus'}"></i>
+          ${showPostForm?'বন্ধ করুন':'নতুন পোস্ট'}
+        </button>
+      </div>`;
+
+    if(showPostForm){
+      html += `<div class="pm-form">
+        <label>শিরোনাম *</label>
+        <input type="text" id="pf-title" placeholder="পোস্টের শিরোনাম..."/>
+        <label>ক্যাটাগরি</label>
+        <input type="text" id="pf-cat" placeholder="যেমন: অর্থনীতি, প্রযুক্তি..."/>
+        <label>ছবি আপলোড করুন</label>
+        <div class="img-upload-box" onclick="document.getElementById('pf-img').click()">
+          <input type="file" id="pf-img" accept="image/*" onchange="previewImg(this)" style="display:none"/>
+          <div id="upload-placeholder">
+            <div class="up-icon"><i class="fa fa-cloud-upload-alt"></i></div>
+            <p>ক্লিক করুন বা ছবি ড্র্যাগ করুন</p>
+            <p style="font-size:0.7rem;margin-top:4px;">PNG, JPG, WEBP সর্বোচ্চ 5MB</p>
+          </div>
+          <img id="img-thumb" class="img-preview-thumb" alt="preview"/>
+        </div>
+        <label>কন্টেন্ট *</label>
+        <textarea id="pf-content" rows="5" placeholder="পোস্টের বিস্তারিত লিখুন..."></textarea>
+        <div class="pm-form-btns">
+          <button class="btn-cancel" onclick="togglePostForm()">বাতিল</button>
+          <button class="btn-publish" onclick="createPost()">✓ পাবলিশ করুন</button>
+        </div>
+      </div>`;
+    }
+
+    html += `<div id="pm-post-list">`;
+    posts.forEach(p=>{
+      html += `<div class="post-item">
+        <img src="${p.image||''}" class="${p.image?'has-img':''}" alt=""/>
+        <div class="post-item-info">
+          <div class="post-item-title">${p.title}</div>
+          <div class="post-item-meta">${p.category} · ${p.date}</div>
+        </div>
+        <div class="post-item-actions">
+          <button class="ico-btn" onclick="viewPostAdmin('${p.id}')" title="প্রিভিউ"><i class="fa fa-eye"></i></button>
+          <button class="ico-btn red" onclick="deletePost('${p.id}')" title="মুছুন"><i class="fa fa-trash"></i></button>
+        </div>
+      </div>`;
+    });
+    if(posts.length===0) html += `<p style="font-size:0.8rem;color:#9ca3af;text-align:center;padding:12px;">কোনো পোস্ট নেই।</p>`;
+    html += `</div></div>`;
+  }
+  el.innerHTML = html;
+}
+
+function togglePostForm(){ showPostForm=!showPostForm; renderPostsWidget(); }
+
+function previewImg(input){
+  const file = input.files[0];
+  if(!file) return;
+  if(file.size > 5*1024*1024){ toast('ছবি ৫MB এর বেশি হতে পারবে না।','error'); return; }
+  const reader = new FileReader();
+  reader.onload = e=>{
+    pendingImgData = e.target.result;
+    const thumb = document.getElementById('img-thumb');
+    const placeholder = document.getElementById('upload-placeholder');
+    thumb.src = pendingImgData;
+    thumb.style.display = 'block';
+    if(placeholder) placeholder.style.display = 'none';
+  };
+  reader.readAsDataURL(file);
+}
+
+function createPost(){
+  const title   = document.getElementById('pf-title')?.value?.trim();
+  const cat     = document.getElementById('pf-cat')?.value?.trim() || 'সাধারণ';
+  const content = document.getElementById('pf-content')?.value?.trim();
+  if(!title || !content){ toast('শিরোনাম এবং কন্টেন্ট দিন।','error'); return; }
+  const words = content.split(/\s+/).length;
+  posts.unshift({
+    id:'post-'+Date.now(),
+    title, content, category:cat,
+    date: new Date().toLocaleDateString('bn-BD',{day:'numeric',month:'long',year:'numeric'}),
+    readTime: Math.max(1,Math.ceil(words/150)) + ' মিনিট',
+    image: pendingImgData || null
+  });
+  pendingImgData = null;
+  showPostForm = false;
+  renderPostsWidget();
+  toast('পোস্ট সফলভাবে প্রকাশিত হয়েছে! 🎉');
+}
+
+function deletePost(id){
+  confirm2('এই পোস্টটি মুছে ফেলবেন?', ()=>{
+    posts = posts.filter(p=>p.id!==id);
+    if(viewingPost?.id===id) viewingPost=null;
+    renderPostsWidget();
+    toast('পোস্ট মুছে ফেলা হয়েছে।');
+  });
+}
+
+function viewPostAdmin(id){
+  const p = posts.find(x=>x.id===id);
+  if(!p) return;
+  viewingPost = p;
+  switchAdminTab('preview');
+}
+
+/* ─── TOGGLE VISIBILITY ─────────────────────────── */
+function toggleVis(key, path, id){
+  if(id){
+    const w = layout.sidebarRight.find(x=>x.id===id);
+    if(w) w.visible = !w.visible;
+  } else {
+    layout[key].visible = !layout[key].visible;
+  }
+  renderEditor();
+}
+
+/* ─── EDIT MODAL ─────────────────────────────────── */
+function openEditModal(key, path, id, currentTitle, currentContent, showContent){
+  document.getElementById('modal-title-input').value = currentTitle||'';
+  document.getElementById('modal-content-input').value = currentContent||'';
+  document.getElementById('modal-content-wrap').style.display = showContent?'block':'none';
+  modalSaveCb = (title, content)=>{
+    if(id){
+      const w = layout.sidebarRight.find(x=>x.id===id);
+      if(w){ w.title=title; w.content=content; }
+    } else {
+      layout[key].title = title;
+    }
+    renderEditor();
+    toast('পরিবর্তন সেভ হয়েছে।');
+  };
+  openModal('edit-modal');
+}
+
+function saveModal(){
+  const title   = document.getElementById('modal-title-input').value.trim();
+  const content = document.getElementById('modal-content-input').value.trim();
+  if(!title){ toast('নাম দিন।','error'); return; }
+  if(modalSaveCb){ modalSaveCb(title,content); }
+  closeModal('edit-modal');
+}
+
+/* ─── ADD GADGET ─────────────────────────────────── */
+function openAddGadgetModal(){
+  document.getElementById('gadget-name-input').value    = '';
+  document.getElementById('gadget-content-input').value = '';
+  openModal('add-gadget-modal');
+}
+
+function addGadget(){
+  const name    = document.getElementById('gadget-name-input').value.trim();
+  const content = document.getElementById('gadget-content-input').value.trim();
+  if(!name){ toast('গ্যাজেটের নাম দিন।','error'); return; }
+  layout.sidebarRight.push({id:'g-'+Date.now(), title:name, content, visible:true});
+  closeModal('add-gadget-modal');
+  renderSidebar();
+  toast('গ্যাজেট যোগ হয়েছে।');
+}
+
+/* ─── DELETE GADGET ──────────────────────────────── */
+function deleteGadget(id){
+  confirm2('এই গ্যাজেটটি মুছে ফেলবেন?', ()=>{
+    layout.sidebarRight = layout.sidebarRight.filter(w=>w.id!==id);
+    renderSidebar();
+    toast('গ্যাজেট মুছে ফেলা হয়েছে।');
+  });
+}
+
+/* ─── RESET ──────────────────────────────────────── */
+function resetAll(){
+  confirm2('সব ডাটা মুছে ডিফল্টে ফিরবেন?', ()=>{
+    location.reload();
+  });
+}
+
+/* ══════════════════════════════════════════════════
+   BLOG PREVIEW RENDER
+══════════════════════════════════════════════════ */
+function renderBlogPreview(){
+  const wrap = document.getElementById('admin-preview');
+  const visibleSidebar = layout.sidebarRight.filter(w=>w.visible);
+
+  const headerHTML = layout.headerLogo.visible ? `
+  <div class="blog-header">
+    <div class="blog-header-inner">
+      <div class="blog-logo-area">
+        <div class="blog-logo">${layout.headerLogo.title}</div>
+        <div class="blog-tagline">মঞ্জুরুল হক স্যারের শিক্ষামূলক ব্লগ</div>
+      </div>
+      <nav class="blog-nav-links">
+        ${layout.mainMenu.visible?`
+        <a onclick="viewingPost=null;renderBlogPreview()"><i class="fa fa-home"></i> হোম</a>
+        <a><i class="fa fa-info-circle"></i> পরিচিতি</a>
+        <a><i class="fa fa-envelope"></i> যোগাযোগ</a>`:''}
+      </nav>
+    </div>
+  </div>` : '';
+
+  const bannerHTML = layout.mainIntro.visible ? `
+  <div class="blog-banner">
+    <h2>${layout.mainIntro.title}</h2>
+    <p>অর্থনীতির জটিল বিষয়গুলোকে সহজে বুঝতে এবং আইসিটির মাধ্যমে আর্থিকভাবে স্বাবলম্বী হতে আমাদের সাথেই থাকুন।</p>
+  </div>` : '';
+
+  // Main area
+  let mainHTML = '';
+  if(viewingPost){
+    mainHTML = singlePostHTML(viewingPost);
+  } else {
+    if(layout.headlineText.visible){
+      mainHTML += `<div class="section-heading">${layout.headlineText.title}</div>`;
+    }
+    if(layout.mainPosts.visible){
+      if(posts.length===0){
+        mainHTML += `<div class="no-posts"><i class="fa fa-inbox"></i><p>কোনো পোস্ট পাওয়া যায়নি।</p></div>`;
+      } else {
+        posts.forEach(p=>{ mainHTML += postCardHTML(p); });
+      }
+    }
+  }
+
+  // Sidebar
+  const sidebarHTML = visibleSidebar.length > 0
+    ? `<div class="sidebar">${visibleSidebar.map(w=>sidebarWidgetHTML(w)).join('')}</div>`
+    : '';
+
+  const footerHTML = layout.footerNavigation.visible ? `
+  <footer class="blog-footer">
+    <div class="footer-links">
+      <a onclick="viewingPost=null;renderBlogPreview()"><i class="fa fa-home"></i> হোম</a>
+      <a><i class="fa fa-user"></i> পরিচিতি</a>
+      <a><i class="fa fa-book"></i> ব্লগ</a>
+      <a><i class="fa fa-phone"></i> যোগাযোগ</a>
+    </div>
+    <p class="footer-copy">© ২০২৬ Md. Monjurul Haque — সর্বস্বত্ব সংরক্ষিত।</p>
+  </footer>` : '';
+
+  wrap.innerHTML = `
+    ${headerHTML}
+    ${bannerHTML}
+    <div class="blog-body-wrap">
+      <div class="blog-layout">
+        <main>${mainHTML}</main>
+        <aside>${sidebarHTML}</aside>
+      </div>
+    </div>
+    ${footerHTML}
+  `;
+
+  // Attach click handlers for Read More
+  wrap.querySelectorAll('[data-post-id]').forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      const p = posts.find(x=>x.id===btn.dataset.postId);
+      if(p){ viewingPost=p; renderBlogPreview(); wrap.scrollIntoView({behavior:'smooth'}); }
+    });
+  });
+  // Back button
+  const backBtn = wrap.querySelector('#back-to-list');
+  if(backBtn) backBtn.addEventListener('click',()=>{ viewingPost=null; renderBlogPreview(); });
+}
+
+function postCardHTML(p){
+  const excerpt = p.content.length>200 ? p.content.substring(0,200)+'...' : p.content;
+  const imgHTML = p.image
+    ? `<div class="post-card-img"><img src="${p.image}" alt="${p.title}"/></div>`
+    : `<div class="post-card-img" style="height:8px;background:linear-gradient(90deg,var(--navy),var(--blue-light),var(--gold));"></div>`;
+  return `
+  <div class="post-card">
+    ${imgHTML}
+    <div class="post-card-body">
+      <div class="post-cat">${p.category}</div>
+      <h4>${p.title}</h4>
+      <div class="post-meta-row">
+        <span><i class="fa fa-calendar"></i> ${p.date}</span>
+        <span><i class="fa fa-clock"></i> ${p.readTime}</span>
+      </div>
+      <p class="post-excerpt">${excerpt.replace(/\n/g,' ')}</p>
+      <button class="read-more-btn" data-post-id="${p.id}">
+        সম্পূর্ণ পড়ুন <i class="fa fa-arrow-right"></i>
+      </button>
+    </div>
+  </div>`;
+}
+
+function singlePostHTML(p){
+  return `
+  <div class="single-post">
+    <button class="back-btn" id="back-to-list">
+      <i class="fa fa-arrow-left"></i> পোস্ট তালিকায় ফিরুন
+    </button>
+    ${p.image ? `<img src="${p.image}" class="single-post-img visible" alt="${p.title}"/>` : ''}
+    <div class="post-cat">${p.category}</div>
+    <h2>${p.title}</h2>
+    <div class="single-meta">
+      <span><i class="fa fa-calendar"></i> ${p.date}</span>
+      <span><i class="fa fa-clock"></i> ${p.readTime} পড়তে লাগবে</span>
+    </div>
+    <div class="single-content">${p.content}</div>
+  </div>`;
+}
+
+function sidebarWidgetHTML(w){
+  let body = '';
+  switch(w.title){
+    case 'Subscribe Us':
+      body = `<p style="font-size:0.82rem;color:var(--gray-600);margin-bottom:8px;">আমাদের নতুন পোস্টের আপডেট পেতে সাবস্ক্রাইব করুন।</p>
+        <div class="sub-form"><input type="email" placeholder="আপনার ইমেইল..."/><button>যোগ দিন</button></div>`;
+      break;
+    case 'Search This Blog':
+      body = `<div class="search-row"><input type="text" placeholder="খুঁজুন..."/><button><i class="fa fa-search"></i></button></div>`;
+      break;
+    case 'Tags':
+      body = ['অর্থনীতি','ফ্রিল্যান্সিং','AI','ডিজিটাল','প্রযুক্তি','শিক্ষা','অর্থায়ন']
+        .map(t=>`<span class="tag-pill">${t}</span>`).join('');
+      break;
+    case 'Categories':
+      body = ['অর্থনীতি (৫)','ফ্রিল্যান্সিং (৩)','প্রযুক্তি (৪)','শিক্ষা (২)']
+        .map(c=>`<div class="sw-link"><i class="fa fa-folder" style="font-size:0.7rem;color:var(--gold);"></i> ${c}</div>`).join('');
+      break;
+    case 'Popular Posts':
+      body = posts.slice(0,3).map(p=>`
+        <div class="sw-link" data-ppid="${p.id}">
+          <i class="fa fa-newspaper" style="font-size:0.7rem;color:var(--blue-light);"></i>
+          ${p.title.substring(0,40)}...
+        </div>`).join('') || '<p style="font-size:0.8rem;color:#9ca3af;">পোস্ট নেই।</p>';
+      break;
+    case 'About Me':
+      body = `<p>মঞ্জুরুল হক স্যার — অর্থনীতি ও আইসিটি বিভাগ। শিক্ষার্থীদের আর্থিকভাবে সচেতন করে তোলাই আমার লক্ষ্য।</p>`;
+      break;
+    case 'Featured Post':
+      if(posts.length>0){
+        const fp=posts[0];
+        body=`<div class="post-cat">${fp.category}</div>
+          ${fp.image?`<img src="${fp.image}" style="width:100%;border-radius:6px;margin:6px 0;max-height:100px;object-fit:cover;" alt=""/>` : ''}
+          <p style="font-size:0.83rem;font-weight:700;color:var(--navy);line-height:1.4;cursor:pointer;" data-ppid="${fp.id}">${fp.title}</p>
+          <p style="font-size:0.7rem;color:var(--gray-400);margin-top:4px;">${fp.date}</p>`;
+      } else { body='<p style="font-size:0.8rem;color:#9ca3af;">পোস্ট নেই।</p>'; }
+      break;
+    case 'Blog Archive':
+      body = ['মার্চ ২০২৬ (৩)','ফেব্রুয়ারি ২০২৬ (২)','জানুয়ারি ২০২৬ (৪)']
+        .map(a=>`<div class="sw-link"><i class="fa fa-archive" style="font-size:0.7rem;color:var(--gold);"></i> ${a}</div>`).join('');
+      break;
+    case 'Contact Form':
+      body = `<p style="font-size:0.78rem;color:var(--gray-600);margin-bottom:8px;">আমাদের সাথে যোগাযোগ করুন:</p>
+        <input type="text" placeholder="আপনার নাম..." style="width:100%;padding:6px 8px;border:1px solid #e2e8f0;border-radius:4px;font-size:0.78rem;margin-bottom:6px;font-family:'Hind Siliguri',sans-serif;"/>
+        <input type="email" placeholder="ইমেইল..." style="width:100%;padding:6px 8px;border:1px solid #e2e8f0;border-radius:4px;font-size:0.78rem;margin-bottom:6px;font-family:'Hind Siliguri',sans-serif;"/>
+        <button style="width:100%;padding:7px;background:var(--navy);color:white;border:none;border-radius:4px;font-size:0.78rem;font-weight:600;font-family:'Hind Siliguri',sans-serif;cursor:pointer;">পাঠান</button>`;
+      break;
+    default:
+      body = w.content
+        ? `<p>${w.content}</p>`
+        : `<p style="color:#9ca3af;font-style:italic;font-size:0.78rem;">কোনো কন্টেন্ট নেই।</p>`;
+  }
+  const iconMap = {
+    'Popular Posts':'fa-fire','Categories':'fa-tags','Tags':'fa-hashtag',
+    'Blog Archive':'fa-archive','Subscribe Us':'fa-envelope','Search This Blog':'fa-search',
+    'About Me':'fa-user-circle','Featured Post':'fa-star','Contact Form':'fa-paper-plane',
+    'Projects':'fa-folder-open'
+  };
+  const icon = iconMap[w.title] || 'fa-puzzle-piece';
+  return `
+  <div class="sidebar-widget">
+    <div class="sw-title"><i class="fa ${icon}"></i> ${w.title}</div>
+    <div class="sw-body">${body}</div>
+  </div>`;
+}
+
+/* ─── INIT ──────────────────────────────────────── */
+document.addEventListener('click', e=>{
+  // Popular Posts click inside preview
+  const ppEl = e.target.closest('[data-ppid]');
+  if(ppEl){
+    const p = posts.find(x=>x.id===ppEl.dataset.ppid);
+    if(p){ viewingPost=p; renderBlogPreview(); document.getElementById('admin-preview').scrollIntoView({behavior:'smooth'}); }
+  }
+});
+
+// Mobile admin btn
+if(window.innerWidth < 768){
+  const btn = document.getElementById('mob-admin-btn');
+  if(btn) btn.style.display='inline-flex';
+}
+
+// Init landing
+updateStatPosts();
+</script>
+</body>
+</html>

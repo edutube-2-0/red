@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
+<meta name="theme-color" content="#080c14"/>
+<title>EduTube — শিক্ষার আলো</title>
+<link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&family=Exo+2:wght@400;700;900&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --bg:#080c14; --surface:#111827; --surface2:#1a2438;
+  --accent:#f0c040; --accent2:#ff6b35; --accent3:#3df5c1;
+  --red:#ff4d6d; --text:#e8eaf0; --text2:#8a93a8;
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{scroll-behavior:smooth}
+body{
+  background:var(--bg); color:var(--text);
+  font-family:'Hind Siliguri',sans-serif;
+  min-height:100vh; overflow-x:hidden;
+}
+body::before{
+  content:''; position:fixed; inset:0; z-index:0; pointer-events:none;
+  background:
+    radial-gradient(ellipse 80% 50% at 15% 10%,rgba(240,192,64,.07) 0,transparent 60%),
+    radial-gradient(ellipse 60% 40% at 85% 85%,rgba(61,245,193,.06) 0,transparent 55%),
+    radial-gradient(ellipse 50% 60% at 60% 35%,rgba(255,107,53,.04) 0,transparent 50%);
+}
+
+/* HEADER */
+header{
+  position:sticky;top:0;z-index:200;
+  background:rgba(8,12,20,.92);
+  backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+  border-bottom:1px solid rgba(240,192,64,.12);
+  padding:0 16px;height:60px;
+  display:flex;align-items:center;justify-content:space-between;
+}
+.logo{display:flex;align-items:center;gap:9px;text-decoration:none}
+.logo-icon{
+  width:36px;height:36px;
+  background:linear-gradient(135deg,var(--accent),var(--accent2));
+  border-radius:10px;display:flex;align-items:center;justify-content:center;
+  font-size:17px;box-shadow:0 0 18px rgba(240,192,64,.45);
+  animation:pulse-logo 3s ease-in-out infinite;
+}
+@keyframes pulse-logo{0%,100%{box-shadow:0 0 18px rgba(240,192,64,.45)}50%{box-shadow:0 0 32px rgba(240,192,64,.75)}}
+.logo-text{font-family:'Exo 2',sans-serif;font-weight:900;font-size:1.35rem;letter-spacing:-.5px}
+.logo-text .y{color:var(--accent)}.logo-text .w{color:var(--text)}
+.header-right{display:flex;align-items:center;gap:10px}
+.live-pill{
+  background:rgba(255,77,109,.15);border:1px solid rgba(255,77,109,.35);
+  color:#ff4d6d;padding:3px 10px;border-radius:20px;
+  font-size:.7rem;font-weight:700;letter-spacing:.5px;
+  display:flex;align-items:center;gap:5px;
+}
+.live-dot{width:6px;height:6px;border-radius:50%;background:#ff4d6d;animation:blink 1.2s ease-in-out infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.2}}
+#video-count{font-size:.8rem;color:var(--text2)}
+
+/* HERO */
+.hero{
+  position:relative;z-index:1;text-align:center;
+  padding:32px 20px 24px;
+}
+.hero-eyebrow{font-size:.7rem;letter-spacing:3px;text-transform:uppercase;color:var(--accent3);margin-bottom:10px;opacity:0;animation:fade-up .6s .2s forwards}
+.hero h1{font-family:'Exo 2',sans-serif;font-weight:900;font-size:clamp(1.6rem,5.5vw,3rem);line-height:1.15;margin-bottom:8px;opacity:0;animation:fade-up .6s .4s forwards}
+.hero h1 .hl{background:linear-gradient(90deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero p{color:var(--text2);font-size:.88rem;max-width:380px;margin:0 auto;opacity:0;animation:fade-up .6s .6s forwards}
+@keyframes fade-up{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+
+/* GRID */
+.grid-wrap{position:relative;z-index:1;padding:0 10px 90px}
+.section-label{display:flex;align-items:center;gap:10px;margin-bottom:18px;font-size:.7rem;letter-spacing:2px;text-transform:uppercase;color:var(--text2)}
+.section-label::before,.section-label::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.07),transparent)}
+#video-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+@media(min-width:480px){#video-grid{grid-template-columns:repeat(3,1fr)}}
+@media(min-width:720px){#video-grid{grid-template-columns:repeat(4,1fr);gap:14px}}
+@media(min-width:1080px){#video-grid{grid-template-columns:repeat(5,1fr)}}
+
+/* CARD */
+.video-card{
+  background:var(--surface);border-radius:13px;overflow:hidden;
+  border:1px solid rgba(255,255,255,.06);cursor:pointer;
+  transition:transform .3s cubic-bezier(.2,.8,.3,1),border-color .3s,box-shadow .3s;
+  opacity:0;animation:card-in .45s forwards;
+  -webkit-user-select:none;user-select:none;
+}
+.video-card:active{transform:scale(.96)}
+@media(hover:hover){.video-card:hover{transform:translateY(-5px) scale(1.02);border-color:rgba(240,192,64,.28);box-shadow:0 14px 36px rgba(0,0,0,.5),0 0 22px rgba(240,192,64,.13)}}
+@keyframes card-in{from{opacity:0;transform:translateY(16px) scale(.96)}to{opacity:1;transform:translateY(0) scale(1)}}
+
+.thumb-wrap{position:relative;aspect-ratio:9/16;background:var(--surface2);overflow:hidden}
+.thumb-wrap video{width:100%;height:100%;object-fit:cover;display:block}
+.thumb-grad{position:absolute;bottom:0;left:0;right:0;height:50%;background:linear-gradient(to top,rgba(0,0,0,.8),transparent);pointer-events:none}
+.play-overlay{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .25s}
+@media(hover:hover){.video-card:hover .play-overlay{opacity:1}}
+.thumb-wrap.tapped .play-overlay{opacity:1}
+.play-btn{width:46px;height:46px;background:rgba(240,192,64,.88);border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 0 26px rgba(240,192,64,.5)}
+.play-btn svg{fill:#111;margin-left:3px}
+.card-num{position:absolute;top:7px;right:7px;font-family:'Exo 2',sans-serif;font-size:.6rem;font-weight:700;background:rgba(0,0,0,.65);backdrop-filter:blur(6px);padding:2px 7px;border-radius:5px;color:var(--accent);border:1px solid rgba(240,192,64,.18)}
+
+.card-body{padding:9px 10px 10px}
+.card-title{font-size:.78rem;font-weight:600;color:var(--text);line-height:1.4;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;margin-bottom:5px}
+.card-meta{font-size:.65rem;color:var(--text2);display:flex;align-items:center;gap:5px;margin-bottom:7px}
+.card-views{color:var(--accent3);font-weight:600}
+.cdot{width:3px;height:3px;border-radius:50%;background:rgba(255,255,255,.18);display:inline-block}
+.card-actions{display:flex;gap:5px}
+.card-btn{
+  flex:1;display:flex;align-items:center;justify-content:center;gap:3px;
+  padding:6px 3px;border-radius:8px;font-size:.65rem;font-weight:600;
+  border:none;cursor:pointer;font-family:'Hind Siliguri',sans-serif;
+  transition:background .18s,transform .12s;
+}
+.card-btn:active{transform:scale(.92)}
+.love-btn{background:rgba(255,77,109,.1);color:#ff4d6d}
+.love-btn.loved{background:rgba(255,77,109,.22)}
+.love-btn.loved .li{animation:hpop .3s ease}
+@keyframes hpop{0%{transform:scale(1)}50%{transform:scale(1.5)}100%{transform:scale(1)}}
+.share-btn{background:rgba(61,245,193,.08);color:var(--accent3)}
+
+/* LOADER */
+#loader{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:60px 20px;gap:16px}
+.spinner{width:40px;height:40px;border:3px solid rgba(240,192,64,.15);border-top-color:var(--accent);border-radius:50%;animation:spin .8s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+#loader p{color:var(--text2);font-size:.86rem}
+#empty{display:none;text-align:center;padding:60px 20px}
+#empty .ei{font-size:2.6rem;margin-bottom:12px;opacity:.4}
+#empty p{color:var(--text2)}
+
+/* LIGHTBOX */
+#lightbox{
+  display:none;position:fixed;inset:0;z-index:999;
+  background:rgba(4,6,12,.97);
+  backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  flex-direction:column;align-items:center;
+  padding-top:max(env(safe-area-inset-top,0px),8px);
+}
+#lightbox.open{display:flex}
+.lb-header{width:100%;display:flex;align-items:center;justify-content:space-between;padding:4px 14px 8px;flex-shrink:0}
+.lb-hdr-title{font-size:.78rem;color:var(--text2);flex:1;text-align:center;padding:0 8px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.lb-close{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);color:var(--text);width:36px;height:36px;border-radius:50%;cursor:pointer;font-size:.95rem;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.lb-close:active{background:rgba(240,192,64,.2)}
+.lb-main{position:relative;flex:1;display:flex;align-items:center;justify-content:center;width:100%;overflow:hidden}
+.lb-video-wrap{
+  width:min(90vw,calc((100vh - 170px) * 9/16));
+  aspect-ratio:9/16;background:#000;border-radius:14px;overflow:hidden;
+  box-shadow:0 0 60px rgba(0,0,0,.8),0 0 28px rgba(240,192,64,.1);
+  animation:lb-in .28s cubic-bezier(.2,.8,.3,1);
+}
+@keyframes lb-in{from{opacity:0;transform:scale(.88)}to{opacity:1;transform:scale(1)}}
+#lb-video{width:100%;height:100%;object-fit:contain;display:block;background:#000}
+.lb-arrow{position:absolute;top:50%;transform:translateY(-50%);background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);color:var(--text);width:40px;height:40px;border-radius:50%;cursor:pointer;font-size:1.05rem;display:none;align-items:center;justify-content:center}
+.lb-arrow:active{background:rgba(240,192,64,.18)}
+#lb-prev{left:5px}#lb-next{right:5px}
+@media(min-width:480px){.lb-arrow{display:flex}}
+.swipe-hint{position:absolute;bottom:10px;left:50%;transform:translateX(-50%);font-size:.6rem;color:rgba(255,255,255,.22);letter-spacing:1px;pointer-events:none;animation:fade-hint 3s 2s forwards}
+@keyframes fade-hint{0%{opacity:1}100%{opacity:0}}
+.lb-bottom{width:100%;flex-shrink:0;padding:10px 16px max(calc(var(--safe-bottom) + 10px),14px);background:linear-gradient(to top,rgba(4,6,12,.96),transparent)}
+.lb-title{font-size:.88rem;font-weight:600;color:var(--text);margin-bottom:3px;text-align:center}
+.lb-sub{font-size:.7rem;color:var(--text2);text-align:center;margin-bottom:10px}
+.lb-actions{display:flex;gap:8px;justify-content:center;margin-bottom:8px}
+.lb-btn{display:flex;align-items:center;gap:5px;padding:9px 20px;border-radius:28px;font-size:.78rem;font-weight:600;cursor:pointer;border:none;font-family:'Hind Siliguri',sans-serif;transition:transform .12s}
+.lb-btn:active{transform:scale(.95)}
+.lb-love{background:rgba(255,77,109,.14);color:#ff4d6d;border:1px solid rgba(255,77,109,.28)}
+.lb-love.loved{background:rgba(255,77,109,.26)}
+.lb-share{background:rgba(61,245,193,.1);color:var(--accent3);border:1px solid rgba(61,245,193,.22)}
+.lb-nav{display:flex;gap:7px;justify-content:center}
+.lb-nav-btn{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);color:var(--text);padding:7px 18px;border-radius:22px;font-size:.75rem;cursor:pointer;font-family:'Hind Siliguri',sans-serif}
+.lb-nav-btn:active{background:rgba(240,192,64,.14);color:var(--accent)}
+
+/* TOAST */
+.toast{position:fixed;bottom:max(calc(var(--safe-bottom)+18px),22px);left:50%;transform:translateX(-50%) translateY(16px);background:var(--surface2);border:1px solid rgba(255,255,255,.1);color:var(--text);padding:9px 18px;border-radius:28px;font-size:.78rem;white-space:nowrap;z-index:9999;opacity:0;transition:opacity .22s,transform .22s;pointer-events:none}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+/* FOOTER */
+footer{position:relative;z-index:1;text-align:center;padding:20px 16px calc(20px + var(--safe-bottom));border-top:1px solid rgba(255,255,255,.05);color:var(--text2);font-size:.73rem}
+footer span{color:var(--accent)}
+</style>
+</head>
+<body>
+
+<header>
+  <a class="logo" href="#"><div class="logo-icon">🎓</div><div class="logo-text"><span class="y">Edu</span><span class="w">Tube</span></div></a>
+  <div class="header-right">
+    <div class="live-pill"><span class="live-dot"></span>LIVE</div>
+    <span id="video-count">লোড হচ্ছে...</span>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="hero-eyebrow">✦ শিক্ষার আলো ছড়িয়ে দাও ✦</div>
+  <h1>শব্দ ও ছবি দিয়ে<br><span class="hl">শিল্প তৈরি করো</span></h1>
+  <p>EduTube-এ স্বাগতম — যেখানে জ্ঞান ও সৌন্দর্য একসাথে মেলে।</p>
+</section>
+
+<div class="grid-wrap">
+  <div class="section-label">সকল ভিডিও</div>
+  <div id="loader"><div class="spinner"></div><p>ভিডিও লোড হচ্ছে...</p></div>
+  <div id="empty"><div class="ei">📭</div><p>কোনো ভিডিও পাওয়া যায়নি।</p></div>
+  <div id="video-grid"></div>
+</div>
+
+<div id="lightbox">
+  <div class="lb-header">
+    <button class="lb-close" id="lbCloseBtn">✕</button>
+    <div class="lb-hdr-title" id="lbHdrTitle">EduTube</div>
+    <div style="width:36px"></div>
+  </div>
+  <div class="lb-main" id="lbMain">
+    <button class="lb-arrow" id="lbPrev">‹</button>
+    <div class="lb-video-wrap">
+      <video id="lb-video" controls autoplay playsinline webkit-playsinline></video>
+    </div>
+    <button class="lb-arrow" id="lbNext">›</button>
+    <div class="swipe-hint">← সোয়াইপ করুন →</div>
+  </div>
+  <div class="lb-bottom">
+    <div class="lb-title" id="lbTitle"></div>
+    <div class="lb-sub" id="lbSub"></div>
+    <div class="lb-actions">
+      <button class="lb-btn lb-love" id="lbLoveBtn" onclick="toggleLbLove()">
+        <span id="lbLoveIcon">🤍</span><span id="lbLoveCount">লাভ</span>
+      </button>
+      <button class="lb-btn lb-share" onclick="shareVideo()">🔗 শেয়ার করুন</button>
+    </div>
+    <div class="lb-nav">
+      <button class="lb-nav-btn" onclick="changeVideo(-1)">‹ আগের</button>
+      <button class="lb-nav-btn" onclick="changeVideo(1)">পরের ›</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+<footer>তৈরি করেছেন <span>economist-bd</span> · EduTube © 2025</footer>
+
+<script>
+const GITHUB_USER='economist-bd', GITHUB_REPO='EduTube', GITHUB_BRANCH='main';
+const RAW_BASE=`https://raw.githubusercontent.com/${GITHUB_USER}/${GITHUB_REPO}/${GITHUB_BRANCH}/`;
+const API_URL=`https://api.github.com/repos/${GITHUB_USER}/${GITHUB_REPO}/git/trees/${GITHUB_BRANCH}?recursive=1`;
+const VIDEO_EXTS=['.mp4','.webm','.ogg','.mov','.mkv','.m4v'];
+
+const TITLES=[
+  'বাংলাদেশের প্রাকৃতিক সৌন্দর্য','শিক্ষার আলোয় আলোকিত হও','ডিজিটাল বাংলাদেশের গল্প',
+  'জ্ঞান ও প্রযুক্তির সমন্বয়','সৃজনশীল চিন্তার পথে','ভাষার সৌন্দর্য ও শক্তি',
+  'বিজ্ঞানের অসাধারণ জগৎ','ইতিহাসের পাতায় বাংলা','কবিতার রঙিন দুনিয়া',
+  'গণিতের মজার সমীকরণ','পরিবেশ ও প্রকৃতির পাঠ','সংস্কৃতির আলোকচিত্র',
+  'তরুণ উদ্যোক্তার স্বপ্ন','শিল্প ও সংগীতের মেলবন্ধন','মুক্তিযুদ্ধের চেতনায় অনুপ্রাণিত',
+  'আধুনিক জীবনযাত্রার কথকতা','ভ্রমণ ও আবিষ্কারের আনন্দ','স্বাস্থ্য সচেতনতার বার্তা',
+  'কৃষি ও খাদ্য নিরাপত্তা','প্রযুক্তির নতুন দিগন্ত','সামাজিক উন্নয়নের পথ',
+  'মনোবিজ্ঞানের রহস্যময় দুনিয়া','শিশু শিক্ষার আনন্দময় পদ্ধতি','নারী উদ্যোক্তার অনুপ্রেরণা',
+  'খেলাধুলা ও সুস্থ জীবন','গ্রামীণ জীবনের সুরেলা ছন্দ','মহাকাশ বিজ্ঞানের অজানা কথা',
+  'সাহিত্যের আলোয় সমাজ','পাখির ডাকে ভোরের আলো','নদীর কলকল গানের সুর',
+];
+
+let videos=[], currentIdx=0;
+const loveState={}, viewData={};
+
+function sr(s){let x=Math.sin(s+1)*10000;return x-Math.floor(x)}
+function fv(n){
+  if(n>=10000000) return (n/10000000).toFixed(1)+'কোটি';
+  if(n>=100000)   return (n/100000).toFixed(1)+'লক্ষ';
+  if(n>=1000)     return (n/1000).toFixed(1)+'হাজার';
+  return ''+n;
+}
+function getTitle(i){return TITLES[i%TITLES.length]}
+function getViews(i){
+  if(!viewData[i]) viewData[i]=200000+Math.floor(sr(i*7+3)*780000);
+  return viewData[i];
+}
+function getLove(i){
+  if(!loveState[i]) loveState[i]={loved:false,count:Math.floor(sr(i*13+5)*48000)+2000};
+  return loveState[i];
+}
+function toast(msg){
+  const t=document.getElementById('toast');
+  t.textContent=msg;t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),2200);
+}
+
+async function fetchVideos(){
+  try{
+    const r=await fetch(API_URL);
+    if(!r.ok) throw r.status;
+    const d=await r.json();
+    videos=(d.tree||[])
+      .filter(f=>f.type==='blob'&&VIDEO_EXTS.some(e=>f.path.toLowerCase().endsWith(e)))
+      .map((f,i)=>({url:RAW_BASE+f.path.split('/').map(encodeURIComponent).join('/'),index:i}));
+  }catch(e){console.error(e)}
+  return videos;
+}
+
+function renderGrid(vids){
+  const g=document.getElementById('video-grid');
+  g.innerHTML='';
+  vids.forEach((v,i)=>{
+    const title=getTitle(i), views=getViews(i), ld=getLove(i);
+    const card=document.createElement('div');
+    card.className='video-card';
+    card.style.animationDelay=Math.min(i*50,700)+'ms';
+    card.innerHTML=`
+      <div class="thumb-wrap" id="tw${i}">
+        <video src="${v.url}#t=0.5" preload="metadata" muted playsinline webkit-playsinline></video>
+        <div class="thumb-grad"></div>
+        <div class="play-overlay"><div class="play-btn"><svg width="15" height="15" viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div></div>
+        <div class="card-num">#${String(i+1).padStart(2,'0')}</div>
+      </div>
+      <div class="card-body">
+        <div class="card-title">${title}</div>
+        <div class="card-meta">
+          <span class="card-views">👁 ${fv(views)}</span>
+          <span class="cdot"></span>
+          <span>9:16 · HD</span>
+        </div>
+        <div class="card-actions">
+          <button class="card-btn love-btn${ld.loved?' loved':''}" id="lb${i}" onclick="toggleLove(event,${i})">
+            <span class="li">${ld.loved?'❤️':'🤍'}</span>
+            <span id="lc${i}">${fv(ld.count)}</span>
+          </button>
+          <button class="card-btn share-btn" onclick="shareCard(event,${i})">🔗 শেয়ার</button>
+        </div>
+      </div>`;
+    const vid=card.querySelector('video');
+    const tw=card.querySelector('.thumb-wrap');
+    // desktop hover preview
+    card.addEventListener('mouseenter',()=>vid.play().catch(()=>{}));
+    card.addEventListener('mouseleave',()=>{vid.pause();vid.currentTime=0});
+    // tap to open
+    tw.addEventListener('click',()=>openLightbox(i));
+    tw.addEventListener('touchstart',()=>tw.classList.add('tapped'),{passive:true});
+    tw.addEventListener('touchend',()=>setTimeout(()=>tw.classList.remove('tapped'),380),{passive:true});
+    g.appendChild(card);
+  });
+}
+
+function toggleLove(e,i){
+  e.stopPropagation();
+  const ld=getLove(i);
+  ld.loved=!ld.loved;ld.count+=ld.loved?1:-1;
+  const btn=document.getElementById('lb'+i);
+  btn.classList.toggle('loved',ld.loved);
+  btn.querySelector('.li').textContent=ld.loved?'❤️':'🤍';
+  document.getElementById('lc'+i).textContent=fv(ld.count);
+  if(ld.loved) toast('❤️ ভালোবাসা জানানো হয়েছে!');
+}
+function shareCard(e,i){
+  e.stopPropagation();
+  const title=getTitle(i);
+  if(navigator.share){navigator.share({title:'EduTube: '+title,text:'EduTube-এ দেখুন: '+title,url:location.href}).catch(()=>{});}
+  else navigator.clipboard?.writeText(location.href).then(()=>toast('🔗 লিংক কপি হয়েছে!'));
+}
+
+function openLightbox(idx){
+  currentIdx=idx;
+  const v=videos[idx], title=getTitle(idx), views=getViews(idx), ld=getLove(idx);
+  const lv=document.getElementById('lb-video');
+  lv.src=v.url;lv.play().catch(()=>{});
+  document.getElementById('lbHdrTitle').textContent=title;
+  document.getElementById('lbTitle').textContent=title;
+  document.getElementById('lbSub').textContent=`👁 ${fv(views)} ভিউ  •  ${idx+1} / ${videos.length}`;
+  syncLbLove(idx);
+  document.getElementById('lightbox').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function syncLbLove(i){
+  const ld=getLove(i);
+  document.getElementById('lbLoveIcon').textContent=ld.loved?'❤️':'🤍';
+  document.getElementById('lbLoveCount').textContent=fv(ld.count)+' লাভ';
+  document.getElementById('lbLoveBtn').classList.toggle('loved',ld.loved);
+}
+function toggleLbLove(){
+  const ld=getLove(currentIdx);
+  ld.loved=!ld.loved;ld.count+=ld.loved?1:-1;
+  syncLbLove(currentIdx);
+  const b=document.getElementById('lb'+currentIdx);
+  if(b){b.classList.toggle('loved',ld.loved);b.querySelector('.li').textContent=ld.loved?'❤️':'🤍';document.getElementById('lc'+currentIdx).textContent=fv(ld.count);}
+  if(ld.loved) toast('❤️ ভালোবাসা জানানো হয়েছে!');
+}
+function shareVideo(){
+  const title=getTitle(currentIdx);
+  if(navigator.share){navigator.share({title:'EduTube: '+title,text:'EduTube-এ দেখুন: '+title,url:location.href}).catch(()=>{});}
+  else navigator.clipboard?.writeText(location.href).then(()=>toast('🔗 লিংক কপি হয়েছে!'));
+}
+function closeLightbox(){
+  document.getElementById('lightbox').classList.remove('open');
+  const v=document.getElementById('lb-video');v.pause();v.src='';
+  document.body.style.overflow='';
+}
+function changeVideo(d){currentIdx=(currentIdx+d+videos.length)%videos.length;openLightbox(currentIdx);}
+
+// swipe
+(function(){
+  const el=document.getElementById('lbMain');
+  let sx=0,sy=0;
+  el.addEventListener('touchstart',e=>{sx=e.touches[0].clientX;sy=e.touches[0].clientY},{passive:true});
+  el.addEventListener('touchend',e=>{
+    const dx=e.changedTouches[0].clientX-sx,dy=e.changedTouches[0].clientY-sy;
+    if(Math.abs(dx)>Math.abs(dy)&&Math.abs(dx)>44) changeVideo(dx<0?1:-1);
+  },{passive:true});
+})();
+
+document.getElementById('lbCloseBtn').onclick=closeLightbox;
+document.getElementById('lbPrev').onclick=()=>changeVideo(-1);
+document.getElementById('lbNext').onclick=()=>changeVideo(1);
+document.addEventListener('keydown',e=>{
+  if(!document.getElementById('lightbox').classList.contains('open')) return;
+  if(e.key==='Escape') closeLightbox();
+  if(e.key==='ArrowRight') changeVideo(1);
+  if(e.key==='ArrowLeft') changeVideo(-1);
+});
+document.getElementById('lightbox').addEventListener('click',function(e){if(e.target===this)closeLightbox();});
+
+(async()=>{
+  const vids=await fetchVideos();
+  document.getElementById('loader').style.display='none';
+  if(!vids.length){
+    document.getElementById('empty').style.display='block';
+    document.getElementById('video-count').textContent='০ টি ভিডিও';
+  }else{
+    document.getElementById('video-count').textContent=vids.length+' টি ভিডিও';
+    renderGrid(vids);
+  }
+})();
+</script>
+</body>
+</html>
